@@ -11,7 +11,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/MAD-Goat-Project/mad-web-app">
-    <img src="images/mad-goat.png" alt="Logo" width="100" height="120">
+    <img src="images/mad-goat.png" alt="Logo" width="200" height="200">
   </a>
 
   <p align="center">
