@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "postinstall": "husky install",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "eslint --fix . && prettier --write .",
+    "lint:fix": "eslint --fix . && prettier --write .",
     "lint:check": "eslint . && prettier --check .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,11 +20,13 @@
     "@react-keycloak/web": "^3.4.0",
     "eslint": "^8.2.0",
     "keycloak-js": "^21.0.1",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.9.0"
   },
   "devDependencies": {
+    "@svgr/webpack": "^6.5.1",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
@@ -37,6 +40,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "husky": "^8.0.3",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5",
     "vite": "^4.1.0"

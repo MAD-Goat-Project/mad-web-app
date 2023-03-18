@@ -1,39 +1,75 @@
 import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
+import { styled, useTheme } from '@mui/material/styles';
+import { Box } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import PropTypes from 'prop-types';
-import keycloak from '../configurations/Keycloak';
+import { Avatar } from './Avatar';
+import Grid from '@mui/material/Grid';
+import MADHorizontal from '../assets/mad-horizontal.svg';
+import { AppDrawer } from './Drawer';
 
-export default function ButtonAppBar() {
+const drawerWidth = 240;
+
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean;
+}
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})<AppBarProps>(({ theme, open }) => ({
+  transition: theme.transitions.create(['margin', 'width'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  backgroundColor: '#ffff',
+  ...(open && {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: `${drawerWidth}px`,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+export default function PersistentDrawerLeft() {
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const madImageSize = { width: '100px', height: '50px' };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ display: 'flex' }}>
+      <CssBaseline />
+      <AppBar position="fixed" open={open}>
         <Toolbar>
           <IconButton
-            size="large"
-            edge="start"
             color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            <MenuIcon />
+            {
+              <img
+                src={MADHorizontal}
+                alt="MAD Goat Logo"
+                style={madImageSize}
+              />
+            }
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {keycloak.tokenParsed?.name}
-          </Typography>
-          <Button color="inherit" onClick={() => keycloak.logout()}>
-            Logout
-          </Button>
-          <Button color="inherit" onClick={() => keycloak.login()}>
-            Login
-          </Button>
+          <Grid container justifyContent="flex-end">
+            <Avatar />
+          </Grid>
         </Toolbar>
       </AppBar>
+      <AppDrawer openDrawer={open} setOpenState={setOpen} appBarTheme={theme} />
     </Box>
   );
 }
