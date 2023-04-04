@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { Avatar } from './Avatar';
 import Grid from '@mui/material/Grid';
 import MADHorizontal from '../assets/mad-horizontal.svg';
-import { AppDrawer } from './Drawer';
+import { AppDrawer } from './drawer/Drawer';
 
 const drawerWidth = 240;
 
@@ -35,7 +35,6 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 export default function PersistentDrawerLeft() {
-  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -69,7 +68,7 @@ export default function PersistentDrawerLeft() {
           </Grid>
         </Toolbar>
       </AppBar>
-      <AppDrawer openDrawer={open} setOpenState={setOpen} appBarTheme={theme} />
+      <AppDrawer openDrawer={open} setOpenState={setOpen} />
     </Box>
   );
 }

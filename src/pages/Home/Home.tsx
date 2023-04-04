@@ -9,7 +9,6 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-import { Copyright } from '../../components/Copyright';
 import ButtonAppBar from '../../components/AppBar';
 import SchoolIcon from '@mui/icons-material/School';
 import { BugReport, Speed } from '@mui/icons-material';
@@ -120,9 +119,7 @@ function HomePage() {
           mt: 8,
           py: [3, 6],
         }}
-      >
-        <Copyright sx={{ mt: 5 }} />
-      </Container>
+      ></Container>
       {/* End footer */}
     </React.Fragment>
   );

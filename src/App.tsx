@@ -7,6 +7,7 @@ import PrivateRoute from './helpers/PrivateRoute';
 import theme from './configurations/Theme';
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
+import { Copyright } from './components/Copyright';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             </Routes>
           </React.StrictMode>
         </ReactKeycloakProvider>
+        <Copyright />
       </ThemeProvider>
     </div>
   );
