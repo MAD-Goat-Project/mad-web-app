@@ -8,6 +8,7 @@ export const drawerOptions = [
   {
     Name: 'Lessons',
     Icon: SchoolIcon,
+    hasChildren: true,
     Children: [
       'Introduction',
       'Open Source Software',

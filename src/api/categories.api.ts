@@ -1,13 +1,8 @@
 import { api } from './configs/axiosConfig';
 
-const get = async () => {
-  try {
-    const { data } = await api().get('/categories');
-    return data;
-  } catch (error) {
-    console.error(error);
-  }
-};
+async function get() {
+  return api().get('/categories');
+}
 
 const Categories = {
   get,

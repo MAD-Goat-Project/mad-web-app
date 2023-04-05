@@ -12,11 +12,11 @@ import * as React from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Collapse } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import Typography from '@mui/material/Typography';
 import { drawerOptions } from './DrawerOptions';
 import PropTypes from 'prop-types';
 import { useQuery } from 'react-query';
 import Categories from '../../api/categories.api';
+import { ListDrawer } from './ListDrawer';
 
 const drawerWidth = 240;
 
@@ -97,26 +97,17 @@ export function AppDrawer({
                 <option.Icon />
               </ListItemIcon>
               <ListItemText primary={option.Name} />
-              {option.Children ? open ? <ExpandLess /> : <ExpandMore /> : null}
+              {option.hasChildren ? (
+                open ? (
+                  <ExpandLess />
+                ) : (
+                  <ExpandMore />
+                )
+              ) : null}
             </ListItemButton>
-            {option.Children ? (
+            {option.hasChildren ? (
               <Collapse in={open} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
-                  {option.Children.map((child) => (
-                    <ListItemButton key={child}>
-                      <ListItemText>
-                        <Typography
-                          variant="body2"
-                          gutterBottom
-                          align={'left'}
-                          sx={{ marginLeft: '3rem' }}
-                        >
-                          {child}
-                        </Typography>
-                      </ListItemText>
-                    </ListItemButton>
-                  ))}
-                </List>
+                <ListDrawer />
               </Collapse>
             ) : null}
           </div>
