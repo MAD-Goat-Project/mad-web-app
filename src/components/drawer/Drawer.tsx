@@ -9,13 +9,12 @@ import ListItemText from '@mui/material/ListItemText';
 import Drawer from '@mui/material/Drawer';
 
 import * as React from 'react';
+import { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Collapse } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { drawerOptions } from './DrawerOptions';
 import PropTypes from 'prop-types';
-import { useQuery } from 'react-query';
-import Categories from '../../api/categories.api';
 import { ListDrawer } from './ListDrawer';
 
 const drawerWidth = 240;
@@ -38,16 +37,22 @@ export function AppDrawer({
     justifyContent: 'flex-end',
   }));
 
-  const [open, setOpen] = React.useState(true);
-  const {
-    data: categories,
-    isLoading,
-    error,
-  } = useQuery('categories', Categories.get);
+  const [open, setOpen] = React.useState(false);
 
-  if (categories) {
-    console.log(categories);
-  }
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const drawer = document.getElementById('app-drawer');
+      if (drawer && !drawer.contains(event.target as Node)) {
+        setOpenState(false);
+      }
+    };
+
+    window.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [setOpenState]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -56,11 +61,12 @@ export function AppDrawer({
     setOpenState(false);
   };
 
-  // TODO: Clicking outside the drawer should close it
+  // TODO : Move the content when the drawer is open
   return (
     <Drawer
       sx={{
         width: drawerWidth,
+        position: 'relative',
         flexShrink: 0,
         '& .MuiDrawer-paper': {
           width: drawerWidth,
@@ -70,6 +76,7 @@ export function AppDrawer({
       variant="persistent"
       anchor="left"
       open={openDrawer}
+      id="app-drawer"
     >
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>

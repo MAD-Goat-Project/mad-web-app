@@ -8,6 +8,10 @@ import theme from './configurations/Theme';
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Copyright } from './components/Copyright';
+import Lesson from './pages/Lessons/Lesson';
+import GlobalStyles from '@mui/material/GlobalStyles';
+import CssBaseline from '@mui/material/CssBaseline';
+import ButtonAppBar from './components/AppBar';
 
 function App() {
   return (
@@ -21,12 +25,25 @@ function App() {
           }}
         >
           <React.StrictMode>
+            <GlobalStyles
+              styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }}
+            />
+            <CssBaseline />
+            <ButtonAppBar />
             <Routes>
               <Route
                 path="/"
                 element={
                   <PrivateRoute>
                     <Home />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/lessons/:lessonName"
+                element={
+                  <PrivateRoute>
+                    <Lesson />
                   </PrivateRoute>
                 }
               />

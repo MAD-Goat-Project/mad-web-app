@@ -1,17 +1,16 @@
 import { AxiosError, AxiosInstance } from 'axios';
 
-// TODO: Add log on DEV nd improve this
-/*const logOnDevelopment = (error: AxiosError): void => {
-  if (process.env.NODE_ENV === 'development') {
+const logOnDevelopment = (error: AxiosError): void => {
+  if (import.meta.env.MODE === 'development') {
     console.error(error);
   }
-};*/
+};
 
 function errorHandler(error: AxiosError): Promise<AxiosError> {
   const statusCode = error.response?.status;
 
   if (statusCode && statusCode !== 401) {
-    console.error(error);
+    logOnDevelopment(error);
     throw error;
   }
 

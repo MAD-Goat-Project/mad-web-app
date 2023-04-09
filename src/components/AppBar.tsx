@@ -24,6 +24,8 @@ const AppBar = styled(MuiAppBar, {
     duration: theme.transitions.duration.leavingScreen,
   }),
   backgroundColor: '#ffff',
+  marginBottom: '20px',
+  width: '100%',
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
@@ -44,7 +46,7 @@ export default function PersistentDrawerLeft() {
   const madImageSize = { width: '100px', height: '50px' };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '10vh' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>

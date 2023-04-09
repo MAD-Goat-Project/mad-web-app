@@ -1,11 +1,10 @@
 import axios, { AxiosInstance } from 'axios';
 import { setupInterceptors } from './axiosInterceptors';
 
-// TODO: Env vars
 export function api(): AxiosInstance {
+  const baseURL: string = import.meta.env.VITE_BASE_URL as string;
   const axiosInstance = axios.create({
-    //withCredentials: true,
-    baseURL: 'http://localhost:3000',
+    baseURL,
   });
 
   return setupInterceptors(axiosInstance);

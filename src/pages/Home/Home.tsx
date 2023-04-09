@@ -4,12 +4,9 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
-import GlobalStyles from '@mui/material/GlobalStyles';
 import Container from '@mui/material/Container';
-import ButtonAppBar from '../../components/AppBar';
 import SchoolIcon from '@mui/icons-material/School';
 import { BugReport, Speed } from '@mui/icons-material';
 
@@ -34,12 +31,6 @@ const tiers = [
 function HomePage() {
   return (
     <React.Fragment>
-      <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }}
-      />
-      <CssBaseline />
-      <ButtonAppBar />
-      {/* Hero unit */}
       <Container disableGutters component="main" sx={{ pt: 8, pb: 6 }}>
         <Typography
           component="h1"

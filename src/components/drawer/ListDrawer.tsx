@@ -6,6 +6,7 @@ import * as React from 'react';
 import Categories from '../../api/categories.api';
 import { useQuery } from 'react-query';
 import { Alert, CircularProgress } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 interface ICategory {
   id: number;
@@ -43,21 +44,24 @@ export function ListDrawer() {
   return (
     <List component="div" disablePadding>
       {categoriesList?.map((child) => (
-        <ListItemButton
+        <Link
           key={child.id}
-          onClick={() => console.log('clicking ', child.id)}
+          to={`/lessons/${child.name}`}
+          style={{ textDecoration: 'none', color: 'inherit' }}
         >
-          <ListItemText>
-            <Typography
-              variant="body2"
-              gutterBottom
-              align={'left'}
-              sx={{ marginLeft: '3rem' }}
-            >
-              {child.full_name}
-            </Typography>
-          </ListItemText>
-        </ListItemButton>
+          <ListItemButton key={child.name}>
+            <ListItemText>
+              <Typography
+                variant="body2"
+                gutterBottom
+                align={'left'}
+                sx={{ marginLeft: '3rem' }}
+              >
+                {child.full_name}
+              </Typography>
+            </ListItemText>
+          </ListItemButton>
+        </Link>
       ))}
     </List>
   );
