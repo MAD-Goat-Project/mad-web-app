@@ -1,34 +1,69 @@
 import LessonCard from '../../components/card/LessonCard';
-import { Grid, Pagination } from '@mui/material';
-import { useState } from 'react';
+import { Alert, CircularProgress, Grid, Pagination } from '@mui/material';
+import { ChangeEvent, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Categories from '../../api/categories.api';
+import Lessons, { ILesson } from '../../api/lessons.api';
+import { useQuery } from 'react-query';
 
-const pageSize = 3;
+const pageSize = 6;
 
-function CardListWithPagination({ data }: { data: any[] }) {
+function CardListWithPagination() {
+  const { category = '' } = useParams<{ category: string }>();
+
+  const {
+    data: lessons,
+    isLoading,
+    error,
+  } = useQuery<ILesson[]>('lessons', async () => {
+    const id: number = await Categories.getCategoryId(category);
+
+    return Lessons.get(id);
+  });
+
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleChangePage = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
+  const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
   };
 
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentData = data.slice(startIndex, endIndex);
+  //const startIndex = (currentPage - 1) * pageSize;
+  //const endIndex = startIndex + pageSize;
+  //const currentData = data.slice(startIndex, endIndex);
+
+  if (isLoading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <Alert severity="error">
+          Unable to load lessons, please try again later!{' '}
+        </Alert>
+      </div>
+    );
+  }
 
   return (
     <div>
       <Grid container spacing={6}>
-        {currentData.map((item) => (
-          <Grid item xs={12} key={item.id}>
-            <LessonCard />
+        {lessons?.map((lesson) => (
+          <Grid item xs={12} key={lesson.id}>
+            <LessonCard
+              title={lesson.name}
+              description={lesson.description}
+              lessonId={lesson.id}
+            />
           </Grid>
         ))}
       </Grid>
       <Pagination
-        count={Math.ceil(data.length / pageSize)}
+        count={Math.ceil(lessons ? lessons.length / pageSize : 0)}
         page={currentPage}
         onChange={handleChangePage}
       />
@@ -45,7 +80,7 @@ function LessonPage() {
       justifyContent="center"
       style={{ minHeight: '100vh' }}
     >
-      <CardListWithPagination data={[1, 2, 3, 4, 5, 6]} />
+      <CardListWithPagination />
     </Grid>
   );
 }

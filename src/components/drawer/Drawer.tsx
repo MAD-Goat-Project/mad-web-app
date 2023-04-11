@@ -15,7 +15,7 @@ import { Collapse } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { drawerOptions } from './DrawerOptions';
 import PropTypes from 'prop-types';
-import { ListDrawer } from './ListDrawer';
+import { ListDrawer } from './DrawerChildrenItens';
 
 const drawerWidth = 240;
 

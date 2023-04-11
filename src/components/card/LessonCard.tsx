@@ -5,7 +5,15 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardMedia, Chip } from '@mui/material';
 
-export default function LessonCard() {
+export default function LessonCard({
+  title,
+  description,
+  lessonId,
+}: {
+  title: string;
+  description: string;
+  lessonId: number;
+}) {
   return (
     <Card sx={{ maxWidth: '600px' }}>
       <CardContent>
@@ -31,6 +39,7 @@ export default function LessonCard() {
             {/*
             // TODO: Dynamically load name of the lesson Lizard
 */}
+            {title}
           </Typography>
         </div>
         <Typography
@@ -41,13 +50,12 @@ export default function LessonCard() {
           {/*
           // TODO: Dynamically load description of the lesson Lizards are a
 */}
-          widespread group of squamate reptiles, with over 6,000 species,
-          ranging across all continents except Antarctica
+          {description}
         </Typography>
       </CardContent>
       <CardActions>
         <Button size="small">Take the lesson</Button>{' '}
-        <Chip label="primary" color="primary" />
+        <Chip label="Not Completed" color="primary" />
       </CardActions>
     </Card>
   );

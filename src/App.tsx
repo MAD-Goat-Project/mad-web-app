@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
 import keycloak from './configurations/Keycloak';
 import PrivateRoute from './helpers/PrivateRoute';
-import theme from './configurations/Theme';
+import theme from './configurations/theme';
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
 import { Copyright } from './components/Copyright';
@@ -40,7 +40,7 @@ function App() {
                 }
               />
               <Route
-                path="/lessons/:lessonName"
+                path="/lessons/:category"
                 element={
                   <PrivateRoute>
                     <Lesson />

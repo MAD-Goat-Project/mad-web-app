@@ -14,10 +14,6 @@ interface ICategory {
   full_name: string;
 }
 export function ListDrawer() {
-  /*  const { data, isLoading, error } = useQuery('categories', async () => {
-    const response = await Categories.get();
-    return response;
-  });*/
   const { data, isLoading, error } = useQuery('categories', async () =>
     Categories.get().then((res) => res.data)
   );
