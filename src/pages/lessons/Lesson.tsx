@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import Categories from '../../api/categories.api';
 import Lessons, { ILesson } from '../../api/lessons.api';
 import { useQuery } from 'react-query';
+import classes from './lesson.module.css';
 
 const pageSize = 6;
 
@@ -50,41 +51,29 @@ function CardListWithPagination() {
   }
 
   return (
-    <div>
-      <Grid container spacing={6}>
-        {lessons?.map((lesson) => (
-          <Grid item xs={12} key={lesson.id}>
-            <LessonCard
-              title={lesson.name}
-              description={lesson.description}
-              lessonId={lesson.id}
-            />
-          </Grid>
-        ))}
-      </Grid>
-      <Pagination
-        count={Math.ceil(lessons ? lessons.length / pageSize : 0)}
-        page={currentPage}
-        onChange={handleChangePage}
-      />
+    <div className={classes.lessonContainer}>
+      <div>
+        <Grid container spacing={6}>
+          {lessons?.map((lesson) => (
+            <Grid item xs={12} key={lesson.id}>
+              <LessonCard
+                title={lesson.name}
+                description={lesson.description}
+                lessonId={lesson.id}
+              />
+            </Grid>
+          ))}
+        </Grid>
+        <Pagination
+          count={Math.ceil(lessons ? lessons.length / pageSize : 0)}
+          page={currentPage}
+          onChange={handleChangePage}
+        />
+      </div>
     </div>
-  );
-}
-function LessonPage() {
-  return (
-    <Grid
-      container
-      spacing={0}
-      direction="column"
-      alignItems="center"
-      justifyContent="center"
-      style={{ minHeight: '100vh' }}
-    >
-      <CardListWithPagination />
-    </Grid>
   );
 }
 
 export default function Lesson() {
-  return <LessonPage />;
+  return <CardListWithPagination />;
 }

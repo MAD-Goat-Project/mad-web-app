@@ -15,7 +15,7 @@ export default function LessonCard({
   lessonId: number;
 }) {
   return (
-    <Card sx={{ maxWidth: '600px' }}>
+    <Card sx={{ maxWidth: '600px' }} key={lessonId}>
       <CardContent>
         <div
           style={{
@@ -27,7 +27,7 @@ export default function LessonCard({
           <CardMedia
             sx={{ height: 50, width: 50 }}
             // TODO: Dynamically load the image
-            image="../public/mad.svg"
+            image="/mad.svg"
             title="green iguana"
           />
           <Typography
@@ -36,9 +36,6 @@ export default function LessonCard({
             component="div"
             sx={{ marginLeft: '1rem', marginBottom: '0.5rem' }}
           >
-            {/*
-            // TODO: Dynamically load name of the lesson Lizard
-*/}
             {title}
           </Typography>
         </div>
@@ -47,9 +44,6 @@ export default function LessonCard({
           color="text.secondary"
           sx={{ marginTop: '1rem', textAlign: 'left' }}
         >
-          {/*
-          // TODO: Dynamically load description of the lesson Lizards are a
-*/}
           {description}
         </Typography>
       </CardContent>

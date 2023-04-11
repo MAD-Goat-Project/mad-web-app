@@ -4,7 +4,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Divider from '@mui/material/Divider';
-import keycloak from '../configurations/Keycloak';
+import keycloak from '../../configurations/keycloak';
 
 export function Avatar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);

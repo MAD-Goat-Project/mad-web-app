@@ -5,10 +5,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import { Avatar } from './Avatar';
+import { Avatar } from '../avatar/Avatar';
 import Grid from '@mui/material/Grid';
-import MADHorizontal from '../assets/mad-horizontal.svg';
-import { AppDrawer } from './drawer/Drawer';
+import MADHorizontal from '../../assets/mad-horizontal.svg';
+import { AppDrawer } from '../drawer/Drawer';
 
 const drawerWidth = 240;
 

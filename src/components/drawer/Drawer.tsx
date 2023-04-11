@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Collapse } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { drawerOptions } from './DrawerOptions';
+import { drawerOptions } from './drawerOptions';
 import PropTypes from 'prop-types';
 import { ListDrawer } from './DrawerChildrenItens';
 

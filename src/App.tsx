@@ -1,17 +1,17 @@
 import './App.css';
-import Home from './pages/Home/Home';
+import Home from './pages/home/Home';
 import { Route, Routes } from 'react-router-dom';
 import { ReactKeycloakProvider } from '@react-keycloak/web';
-import keycloak from './configurations/Keycloak';
-import PrivateRoute from './helpers/PrivateRoute';
+import keycloak from './configurations/keycloak';
+import PrivateRoute from './utils/PrivateRoute';
 import theme from './configurations/theme';
 import React from 'react';
 import { ThemeProvider } from '@mui/material/styles';
-import { Copyright } from './components/Copyright';
-import Lesson from './pages/Lessons/Lesson';
+import { Copyright } from './components/copyright/Copyright';
+import Lesson from './pages/lessons/Lesson';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import CssBaseline from '@mui/material/CssBaseline';
-import ButtonAppBar from './components/AppBar';
+import ButtonAppBar from './components/app-bar/AppBar';
 
 function App() {
   return (
