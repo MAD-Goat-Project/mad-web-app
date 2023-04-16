@@ -13,3 +13,5 @@
 test.js
 !.eslintrc.js
 /dist/**
+/.github/**
+/.vscode/**
