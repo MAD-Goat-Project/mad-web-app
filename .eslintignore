@@ -16,3 +16,4 @@ test.js
 Dockerfile
 docker-compose.yml
 /.github/**
+README.md

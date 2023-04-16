@@ -1,12 +1,12 @@
 <a name="readme-top"></a>
 
---> [![Contributors][contributors-shield]][contributors-url] [![Forks][forks-shield]][forks-url] [![Stargazers][stars-shield]][stars-url] [![Issues][issues-shield]][issues-url] [![MIT License][license-shield]][license-url]
 
+[![Test][gha-test-badge]][gha-test-url] [![ Publish Docker image][gha-build-badge]][gha-build-url]
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
   <a href="https://github.com/MAD-Goat-Project/mad-web-app">
-    <img src="images/mad-goat.png" alt="Logo" width="200" height="200">
+    <img src="images/mad-goat.png" alt="Logo" width="180" height="200">
   </a>
 
   <p align="center">
@@ -174,7 +174,7 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [issues-shield]: https://img.shields.io/github/issues/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
 [issues-url]: https://github.com/MAD-Goat-Project/mad-web-app/issues
 [license-shield]: https://img.shields.io/github/license/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
-[license-url]: https://github.com/MAD-Goat-Project/mad-web-app/blob/master/LICENSE.txt
+[license-url]: https://github.com/MAD-Goat-Project/mad-web-app/blob/main/LICENSE
 [product-screenshot]: images/screenshot.png
 [next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [next-url]: https://nextjs.org/
@@ -192,3 +192,10 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [bootstrap-url]: https://getbootstrap.com
 [jquery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [jquery-url]: https://jquery.com
+
+
+[gha-test-badge]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/test.yml/badge.svg
+[gha-test-url]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/test.yml
+
+[gha-build-badge]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/release.yml/badge.svg
+[gha-build-url]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/release.yml
