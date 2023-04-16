@@ -7,9 +7,10 @@
     "postinstall": "husky install",
     "dev": "vite",
     "build": "tsc && vite build",
+    "ci": "rm -rf node_modules && yarn install --frozen-lockfile",
     "preview": "vite preview",
     "lint:fix": "eslint --fix . && prettier --write .",
-    "lint:check": "eslint . && prettier --check .",
+    "lint:check": "eslint . && prettier --check . --ignore-path .eslintignore",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
