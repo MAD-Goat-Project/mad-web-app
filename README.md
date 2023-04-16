@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 
-[![Test][gha-test-badge]][gha-test-url] [![ Publish Docker image][gha-build-badge]][gha-build-url]
+[![Test][gha-test-badge]][gha-test-url] [![Publish Docker image][gha-build-badge]][gha-build-url]
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
