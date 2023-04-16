@@ -197,5 +197,5 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [gha-test-badge]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/test.yml/badge.svg
 [gha-test-url]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/test.yml
 
-[gha-build-badge]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/release.yml/badge.svg
-[gha-build-url]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/release.yml
+[gha-build-badge]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/publish.yml/badge.svg
+[gha-build-url]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/publish.yml
