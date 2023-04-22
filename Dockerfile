@@ -7,4 +7,4 @@ RUN yarn ci
 RUN yarn run build
 
 EXPOSE 3000
-CMD [ "npx", "serve", "build" ]
+CMD [ "npx", "serve", "dist" ]
