@@ -7,8 +7,4 @@ on:
 
 jobs:
   build-and-push-image:
-    - name: create env file
-      run: |
-        echo {{ secrets.ENV_FILE }} > .env
-    - name: build and push image
       uses: MAD-Goat-Project/github-actions-workflows/.github/workflows/publish-docker.yml@main
