@@ -1,11 +1,10 @@
 import LessonCard from '../../components/card/LessonCard';
 import { Alert, CircularProgress, Grid, Pagination } from '@mui/material';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Categories from '../../api/categories.api';
 import Lessons, { ILesson } from '../../api/lessons.api';
 import { useQuery } from 'react-query';
-import classes from './lesson.module.css';
 
 const pageSize = 6;
 
@@ -16,6 +15,7 @@ function CardListWithPagination() {
     data: lessons,
     isLoading,
     error,
+    refetch,
   } = useQuery<ILesson[]>('lessons', async () => {
     const id: number = await Categories.getCategoryId(category);
 
@@ -27,6 +27,10 @@ function CardListWithPagination() {
   const handleChangePage = (event: ChangeEvent<unknown>, value: number) => {
     setCurrentPage(value);
   };
+
+  useEffect(() => {
+    refetch(); // TODO: Refetch the data when the currentPage changes
+  }, [category]);
 
   //const startIndex = (currentPage - 1) * pageSize;
   //const endIndex = startIndex + pageSize;
@@ -51,25 +55,23 @@ function CardListWithPagination() {
   }
 
   return (
-    <div className={classes.lessonContainer}>
-      <div>
-        <Grid container spacing={6}>
-          {lessons?.map((lesson) => (
-            <Grid item xs={12} key={lesson.id}>
-              <LessonCard
-                title={lesson.name}
-                description={lesson.description}
-                lessonId={lesson.id}
-              />
-            </Grid>
-          ))}
-        </Grid>
-        <Pagination
-          count={Math.ceil(lessons ? lessons.length / pageSize : 0)}
-          page={currentPage}
-          onChange={handleChangePage}
-        />
-      </div>
+    <div>
+      <Grid container spacing={2} direction="column">
+        {lessons?.map((lesson) => (
+          <Grid item xs={12} marginBottom={2} key={lesson.id}>
+            <LessonCard
+              title={lesson.name}
+              description={lesson.description}
+              lessonId={lesson.id}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <Pagination
+        count={Math.ceil(lessons ? lessons.length / pageSize : 0)}
+        page={currentPage}
+        onChange={handleChangePage}
+      />
     </div>
   );
 }

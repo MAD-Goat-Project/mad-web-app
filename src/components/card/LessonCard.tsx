@@ -15,7 +15,7 @@ export default function LessonCard({
   lessonId: number;
 }) {
   return (
-    <Card sx={{ maxWidth: '600px' }} key={lessonId}>
+    <Card sx={{ maxWidth: '1200px' }} key={lessonId}>
       <CardContent>
         <div
           style={{

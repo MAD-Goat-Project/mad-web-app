@@ -50,7 +50,7 @@ export function Avatar() {
       >
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <Divider />
-        <MenuItem onClick={handleLogout}>LogOut</MenuItem>
+        <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
       </Menu>
     </div>
   );
