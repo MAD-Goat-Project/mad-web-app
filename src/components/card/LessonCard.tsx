@@ -4,15 +4,18 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardMedia, Chip } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function LessonCard({
   title,
   description,
   lessonId,
+  category,
 }: {
   title: string;
   description: string;
   lessonId: number;
+  category: string;
 }) {
   return (
     <Card sx={{ maxWidth: '1200px' }} key={lessonId}>
@@ -48,7 +51,9 @@ export default function LessonCard({
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Take the lesson</Button>{' '}
+        <Link to={`/lessons/${category}/${lessonId}`}>
+          <Button size="small">Take the lesson</Button>{' '}
+        </Link>
         <Chip label="Not Completed" color="primary" />
       </CardActions>
     </Card>

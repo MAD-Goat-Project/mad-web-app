@@ -12,6 +12,7 @@ import Lesson from './pages/lessons/Lesson';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import CssBaseline from '@mui/material/CssBaseline';
 import ButtonAppBar from './components/app-bar/AppBar';
+import Assessment from './pages/assessments/Assessment';
 
 function App() {
   return (
@@ -44,6 +45,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Lesson />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/lessons/:category/:assessment"
+                element={
+                  <PrivateRoute>
+                    <Assessment />
                   </PrivateRoute>
                 }
               />

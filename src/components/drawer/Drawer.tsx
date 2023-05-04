@@ -3,19 +3,17 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Drawer from '@mui/material/Drawer';
 
 import * as React from 'react';
 import { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Collapse } from '@mui/material';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { drawerOptions } from './drawerOptions';
 import PropTypes from 'prop-types';
 import { ListDrawer } from './DrawerChildrenItens';
+import { Link } from 'react-router-dom';
+import { DrawerListItemButton } from './DrawerListItemButton';
 
 const drawerWidth = 240;
 
@@ -96,22 +94,26 @@ export function AppDrawer({
       >
         {drawerOptions.map((option, index) => (
           <div key={index}>
-            <ListItemButton
-              key={option.Name}
-              onClick={option.Children ? handleClick : undefined}
-            >
-              <ListItemIcon>
-                <option.Icon />
-              </ListItemIcon>
-              <ListItemText primary={option.Name} />
-              {option.hasChildren ? (
-                open ? (
-                  <ExpandLess />
-                ) : (
-                  <ExpandMore />
-                )
-              ) : null}
-            </ListItemButton>
+            {option.hasChildren ? (
+              <DrawerListItemButton
+                handleClick={handleClick}
+                option={option}
+                open={open}
+              />
+            ) : (
+              <Link
+                key={option.Name}
+                to={option.Link || '/'}
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <DrawerListItemButton
+                  handleClick={handleClick}
+                  option={option}
+                  open={open}
+                />
+              </Link>
+            )}
+
             {option.hasChildren ? (
               <Collapse in={open} timeout="auto" unmountOnExit>
                 <ListDrawer />

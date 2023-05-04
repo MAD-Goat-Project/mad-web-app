@@ -6,9 +6,9 @@ import Categories from '../../api/categories.api';
 import Lessons, { ILesson } from '../../api/lessons.api';
 import { useQuery } from 'react-query';
 
-const pageSize = 6;
+const pageSize = 3;
 
-function CardListWithPagination() {
+function LessonPage() {
   const { category = '' } = useParams<{ category: string }>();
 
   const {
@@ -63,6 +63,7 @@ function CardListWithPagination() {
               title={lesson.name}
               description={lesson.description}
               lessonId={lesson.id}
+              category={category}
             />
           </Grid>
         ))}
@@ -77,5 +78,5 @@ function CardListWithPagination() {
 }
 
 export default function Lesson() {
-  return <CardListWithPagination />;
+  return <LessonPage />;
 }
