@@ -41,7 +41,7 @@ function App() {
                 }
               />
               <Route
-                path="/lessons/:category"
+                path="/:category/lessons"
                 element={
                   <PrivateRoute>
                     <Lesson />
@@ -49,7 +49,7 @@ function App() {
                 }
               />
               <Route
-                path="/lessons/:category/:assessment"
+                path="/:category/lessons/:lessonId"
                 element={
                   <PrivateRoute>
                     <Assessment />

@@ -42,7 +42,7 @@ export function ListDrawer() {
       {categoriesList?.map((child) => (
         <Link
           key={child.id}
-          to={`/lessons/${child.name}`}
+          to={`/${child.name}/lessons`}
           style={{ textDecoration: 'none', color: 'inherit' }}
         >
           <ListItemButton key={child.name}>

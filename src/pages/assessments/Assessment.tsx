@@ -1,7 +1,13 @@
-import { Box, Tab, Tabs } from '@mui/material';
+import { Alert, Box, CircularProgress, Tab, Tabs } from '@mui/material';
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import Assessments, {
+  IAssessment,
+  IAssessmentType,
+} from '../../api/assessments.api';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -16,8 +22,8 @@ function TabPanel(props: TabPanelProps) {
     <div
       role="tabpanel"
       hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
+      id={`tab-${index}`}
+      aria-labelledby={`tab-${index}`}
       {...other}
     >
       {value === index && (
@@ -30,39 +36,83 @@ function TabPanel(props: TabPanelProps) {
 }
 function a11yProps(index: number) {
   return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
+    id: `tab-${index}`,
+    'aria-controls': `tab-${index}`,
   };
 }
 function AssessmentPage() {
+  const { lessonId = '' } = useParams<{ lessonId: string }>();
+
+  const {
+    data: assessments,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery<IAssessment[]>('assessments', async () => {
+    const id: number = parseInt(lessonId) || 0;
+    return Assessments.get(id);
+  });
+
+  useEffect(() => {
+    refetch(); // TODO: Refetch the data when the currentPage changes
+  }, [lessonId]);
+
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+  if (isLoading) {
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <Alert severity="error">
+          Unable to load assessments, please try again later!{' '}
+        </Alert>
+      </div>
+    );
+  }
+
+  function transformAssessmentType(type: IAssessmentType) {
+    switch (type) {
+      case IAssessmentType.INTRODUCTION:
+        return 'Introduction';
+      case IAssessmentType.CONCLUSION:
+        return 'Conclusion';
+      default:
+        return 'Assessment';
+    }
+  }
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box sx={{ position: 'sticky', top: 0, zIndex: 1 }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          {assessments?.map((assessment, index) => (
+            <Tab
+              label={transformAssessmentType(assessment.type)}
+              {...a11yProps(index)}
+              key={assessment.id}
+            />
+          ))}
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0}>
-        Item One
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Item Two
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
+      {assessments?.map((assessment, index) => (
+        <TabPanel value={value} index={index} key={assessment.id}>
+          {assessment.description}
+        </TabPanel>
+      ))}
     </Box>
   );
 }

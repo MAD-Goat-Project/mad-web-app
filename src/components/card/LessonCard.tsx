@@ -51,7 +51,7 @@ export default function LessonCard({
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={`/lessons/${category}/${lessonId}`}>
+        <Link to={`/${category}/lessons/${lessonId}`}>
           <Button size="small">Take the lesson</Button>{' '}
         </Link>
         <Chip label="Not Completed" color="primary" />
