@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { Avatar } from '../avatar/Avatar';
 import Grid from '@mui/material/Grid';
 import MADHorizontal from '../../assets/mad-horizontal.svg';
-import { AppDrawer } from '../drawer/Drawer';
+import { AppDrawer } from '../app-drawer/AppDrawer';
 
 const drawerWidth = 240;
 

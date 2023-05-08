@@ -59,7 +59,7 @@ export function AppDrawer({
     setOpenState(false);
   };
 
-  // TODO : Move the content when the drawer is open
+  // TODO : Move the content when the app-drawer is open
   return (
     <Drawer
       sx={{

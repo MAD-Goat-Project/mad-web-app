@@ -3,7 +3,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import * as React from 'react';
-import { IDrawerOptions } from './drawerOptions';
+import { IDrawerOptions } from './IDrawerOptions';
 
 export function DrawerListItemButton({
   handleClick,

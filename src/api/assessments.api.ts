@@ -1,17 +1,6 @@
 import { api } from './configs/axiosConfig';
+import { IAssessment } from '../models/assessment.interface';
 
-export enum IAssessmentType {
-  INTRODUCTION = 1,
-  QUESTION_ANSWER = 2,
-  QUIZ,
-  CONCLUSION = 10,
-}
-export interface IAssessment {
-  id: number;
-  type: IAssessmentType;
-  description: string;
-  goal: string;
-}
 async function get(lessonId: number): Promise<IAssessment[]> {
   return api()
     .get(`/assessments/`, { params: { lessonId } })
