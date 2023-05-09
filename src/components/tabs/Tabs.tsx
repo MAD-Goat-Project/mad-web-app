@@ -1,4 +1,4 @@
-import { Box, Paper, Tab, Tabs, TextField } from '@mui/material';
+import { Box, Chip, Paper, Tab, Tabs, TextField } from '@mui/material';
 import * as React from 'react';
 import { Fragment, useState } from 'react';
 import {
@@ -28,13 +28,13 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
   };
 
   return (
-    <Box sx={{ position: 'sticky', top: 0, zIndex: 1 }}>
+    <Box sx={{ position: 'sticky', zIndex: 1 }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
           value={value}
           onChange={handleChange}
           aria-label="Assessments tabs"
-          centered
+          variant="fullWidth"
         >
           {assessments?.map((assessment, index) => (
             <Tab
@@ -47,13 +47,10 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
       </Box>
       {assessments?.map((assessment, index) => (
         <TabPanel value={value} index={index} key={assessment.id}>
-          <Box sx={{ p: 3 }}>
+          <Box sx={{ p: 3, minWidth: '1000px', minHeight: '1000px' }}>
             <Grid container spacing={2}>
               <Grid container xs={12} alignContent="flex-start">
-                <Typography variant="h6" sx={{ mr: 2 }}>
-                  Description
-                </Typography>
-                <DescriptionIcon />
+                <Chip icon={<DescriptionIcon />} label="Description" />
               </Grid>
               <Grid item xs={12} style={{ marginBottom: '20px' }}>
                 <Paper
@@ -62,6 +59,7 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
                     display: 'flex',
                     justifyContent: 'flex-start',
                     alignItems: 'flex-start',
+                    width: '100%',
                   }}
                 >
                   <Typography variant="body1" textAlign="left">
@@ -73,10 +71,7 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
                 assessment.type !== IAssessmentType.CONCLUSION && (
                   <Fragment>
                     <Grid container xs={12} alignContent="flex-start">
-                      <Typography variant="h6" sx={{ mr: 2 }}>
-                        Goal
-                      </Typography>
-                      <CrisisAlertIcon />
+                      <Chip icon={<CrisisAlertIcon />} label="Goal" />
                     </Grid>
                     <Grid item xs={12} style={{ marginBottom: '20px' }}>
                       <Paper
@@ -90,10 +85,7 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
                       </Paper>
                     </Grid>
                     <Grid container xs={12} alignContent="flex-start">
-                      <Typography variant="h6" sx={{ mr: 2 }}>
-                        Try it out
-                      </Typography>
-                      <ConstructionIcon />
+                      <Chip icon={<ConstructionIcon />} label="Try it out" />
                     </Grid>
                     <Grid item xs={12} style={{ marginBottom: '20px' }}>
                       <Paper sx={{ p: 2 }}>
