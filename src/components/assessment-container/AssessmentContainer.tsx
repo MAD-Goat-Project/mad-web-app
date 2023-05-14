@@ -11,6 +11,7 @@ import {
   IAssessmentType,
 } from '../../models/assessment.interface';
 import { validateAnswer } from '../../utils/answers.utils';
+import DescriptionIcon from '@mui/icons-material/Description';
 
 interface ISnackbarProps {
   open: boolean;
@@ -52,15 +53,9 @@ export function AssessmentContainer({
       });
     });
   }
-  if (
-    assessment.type === IAssessmentType.INTRODUCTION ||
-    assessment.type === IAssessmentType.CONCLUSION
-  ) {
-    return null;
-  }
 
   return (
-    <Fragment>
+    <div>
       <Snackbar
         anchorOrigin={{
           vertical: snackbarProps.vertical,
@@ -74,43 +69,72 @@ export function AssessmentContainer({
         <Alert severity={snackbarProps.severity}>{snackbarProps.message}</Alert>
       </Snackbar>
       <Grid container xs={12} alignContent="flex-start">
-        <Chip icon={<CrisisAlertIcon />} label="Goal" />
+        <Chip icon={<DescriptionIcon />} label="Description" />
       </Grid>
       <Grid item xs={12} style={{ marginBottom: '20px' }}>
-        <Paper sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Typography variant="body1" textAlign="left">
-              {assessment.goal}
-            </Typography>
-          </Box>
+        <Paper
+          sx={{
+            p: 2,
+            display: 'flex',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-start',
+            width: '100%',
+          }}
+        >
+          <Typography variant="body1" textAlign="justify" component="div">
+            {assessment.description.split('\n').map((line, key) => (
+              <React.Fragment key={key}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
+          </Typography>
         </Paper>
       </Grid>
-      <Grid container xs={12} alignContent="flex-start">
-        <Chip icon={<ConstructionIcon />} label="Try it out" />
-      </Grid>
-      <Grid item xs={12} style={{ marginBottom: '20px' }}>
-        <Paper sx={{ p: 2 }}>
-          <Box
-            sx={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-            }}
-          >
-            <TextField
-              label="Submit your answer"
-              sx={{ mb: 2, width: '300px' }}
-              value={answer}
-              onChange={(e) => {
-                setAnswer(e.target.value);
-              }}
-            />
-            <Button variant="contained" onClick={validateAnswerHandler}>
-              Submit
-            </Button>
-          </Box>
-        </Paper>
-      </Grid>
-    </Fragment>
+
+      {assessment.type !== IAssessmentType.INTRODUCTION &&
+        assessment.type !== IAssessmentType.CONCLUSION && (
+          <Fragment>
+            <Grid container xs={12} alignContent="flex-start">
+              <Chip icon={<CrisisAlertIcon />} label="Goal" />
+            </Grid>
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
+              <Paper sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ flexGrow: 1 }}>
+                  <Typography variant="body1" textAlign="left">
+                    {assessment.goal}
+                  </Typography>
+                </Box>
+              </Paper>
+            </Grid>
+            <Grid container xs={12} alignContent="flex-start">
+              <Chip icon={<ConstructionIcon />} label="Try it out" />
+            </Grid>
+            <Grid item xs={12} style={{ marginBottom: '20px' }}>
+              <Paper sx={{ p: 2 }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                  }}
+                >
+                  <TextField
+                    label="Submit your answer"
+                    sx={{ mb: 2, width: '300px' }}
+                    value={answer}
+                    onChange={(e) => {
+                      setAnswer(e.target.value);
+                    }}
+                  />
+                  <Button variant="contained" onClick={validateAnswerHandler}>
+                    Submit
+                  </Button>
+                </Box>
+              </Paper>
+            </Grid>
+          </Fragment>
+        )}
+    </div>
   );
 }

@@ -1,12 +1,10 @@
-import { Box, Chip, Paper, Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs } from '@mui/material';
 import * as React from 'react';
 import { useState } from 'react';
 import { IAssessment } from '../../models/assessment.interface';
 import { transformAssessmentType } from '../../utils/assessments.utils';
 import { TabPanel } from './TabsPanel';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import DescriptionIcon from '@mui/icons-material/Description';
 import { AssessmentContainer } from '../assessment-container/AssessmentContainer';
 
 function a11yProps(index: number) {
@@ -46,24 +44,6 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
           <TabPanel value={value} index={index} key={assessment.id}>
             <Box sx={{ p: 3, minWidth: '80%', minHeight: '80%' }}>
               <Grid container spacing={2}>
-                <Grid container xs={12} alignContent="flex-start">
-                  <Chip icon={<DescriptionIcon />} label="Description" />
-                </Grid>
-                <Grid item xs={12} style={{ marginBottom: '20px' }}>
-                  <Paper
-                    sx={{
-                      p: 2,
-                      display: 'flex',
-                      justifyContent: 'flex-start',
-                      alignItems: 'flex-start',
-                      width: '100%',
-                    }}
-                  >
-                    <Typography variant="body1" textAlign="left">
-                      {assessment.description}
-                    </Typography>
-                  </Paper>
-                </Grid>
                 <AssessmentContainer assessment={assessment} />
               </Grid>
             </Box>
