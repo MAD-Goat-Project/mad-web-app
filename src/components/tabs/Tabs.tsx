@@ -1,19 +1,22 @@
-import { Box, Chip, Paper, Tab, Tabs, TextField } from '@mui/material';
+import { Alert, Box, Chip, Paper, Snackbar, Tab, Tabs } from '@mui/material';
 import * as React from 'react';
-import { Fragment, useState } from 'react';
-import {
-  IAssessment,
-  IAssessmentType,
-} from '../../models/assessment.interface';
+import { useState } from 'react';
+import { IAssessment } from '../../models/assessment.interface';
 import { transformAssessmentType } from '../../utils/assessments.utils';
 import { TabPanel } from './TabsPanel';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import DescriptionIcon from '@mui/icons-material/Description';
-import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
-import ConstructionIcon from '@mui/icons-material/Construction';
-import Button from '@mui/material/Button';
+import { validateAnswer } from '../../utils/answers.utils';
+import { AssessmentContainer } from '../assessment-container/AssessmentContainer';
 
+interface ISnackbarProps {
+  open: boolean;
+  vertical: 'top' | 'bottom';
+  horizontal: 'left' | 'center' | 'right';
+  message: string;
+  severity: 'success' | 'info' | 'warning' | 'error';
+}
 function a11yProps(index: number) {
   return {
     id: `tab-${index}`,
@@ -22,13 +25,56 @@ function a11yProps(index: number) {
 }
 export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
   const [value, setValue] = useState(0);
+  const [assessmentId, setAssessment] = useState(0);
+  const [answer, setAnswer] = useState('');
+  const [snackbarProps, setShowSnackbar] = useState<ISnackbarProps>({
+    open: false,
+    vertical: 'bottom',
+    horizontal: 'right',
+    message: '',
+    severity: 'error',
+  });
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setAssessment(assessments[newValue].id);
   };
+
+  function validateAnswerHandler() {
+    // TODO: Use React Query
+    validateAnswer(assessmentId, answer).then((response) => {
+      if (response) {
+        return setShowSnackbar({
+          ...snackbarProps,
+          open: true,
+          message: 'Correct Answer!',
+          severity: 'success',
+        });
+      }
+      return setShowSnackbar({
+        ...snackbarProps,
+        open: true,
+        message: 'Incorrect Answer!',
+        severity: 'error',
+      });
+    });
+  }
 
   return (
     <Box sx={{ position: 'sticky', zIndex: 1 }}>
+      <Snackbar
+        cy-data="snackbar"
+        anchorOrigin={{
+          vertical: snackbarProps.vertical,
+          horizontal: snackbarProps.horizontal,
+        }}
+        open={snackbarProps.open}
+        onClose={() => setShowSnackbar({ ...snackbarProps, open: false })}
+        autoHideDuration={4000}
+        key={'bottom-right'}
+      >
+        <Alert severity={snackbarProps.severity}>{snackbarProps.message}</Alert>
+      </Snackbar>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
           value={value}
@@ -45,71 +91,41 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
           ))}
         </Tabs>
       </Box>
-      {assessments?.map((assessment, index) => (
-        <TabPanel value={value} index={index} key={assessment.id}>
-          <Box sx={{ p: 3, minWidth: '1000px', minHeight: '1000px' }}>
-            <Grid container spacing={2}>
-              <Grid container xs={12} alignContent="flex-start">
-                <Chip icon={<DescriptionIcon />} label="Description" />
+      {
+        // TODO: Fix Width and Height
+        assessments?.map((assessment, index) => (
+          <TabPanel value={value} index={index} key={assessment.id}>
+            <Box sx={{ p: 3, minWidth: '80%', minHeight: '80%' }}>
+              <Grid container spacing={2}>
+                <Grid container xs={12} alignContent="flex-start">
+                  <Chip icon={<DescriptionIcon />} label="Description" />
+                </Grid>
+                <Grid item xs={12} style={{ marginBottom: '20px' }}>
+                  <Paper
+                    sx={{
+                      p: 2,
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      alignItems: 'flex-start',
+                      width: '100%',
+                    }}
+                  >
+                    <Typography variant="body1" textAlign="left">
+                      {assessment.description}
+                    </Typography>
+                  </Paper>
+                </Grid>
+                <AssessmentContainer
+                  assessment={assessment}
+                  validateAnswerHandler={validateAnswerHandler}
+                  answer={answer}
+                  setAnswer={setAnswer}
+                />
               </Grid>
-              <Grid item xs={12} style={{ marginBottom: '20px' }}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    justifyContent: 'flex-start',
-                    alignItems: 'flex-start',
-                    width: '100%',
-                  }}
-                >
-                  <Typography variant="body1" textAlign="left">
-                    {assessment.description}
-                  </Typography>
-                </Paper>
-              </Grid>
-              {assessment.type !== IAssessmentType.INTRODUCTION &&
-                assessment.type !== IAssessmentType.CONCLUSION && (
-                  <Fragment>
-                    <Grid container xs={12} alignContent="flex-start">
-                      <Chip icon={<CrisisAlertIcon />} label="Goal" />
-                    </Grid>
-                    <Grid item xs={12} style={{ marginBottom: '20px' }}>
-                      <Paper
-                        sx={{ p: 2, display: 'flex', alignItems: 'center' }}
-                      >
-                        <Box sx={{ flexGrow: 1 }}>
-                          <Typography variant="body1" textAlign="left">
-                            {assessment.goal}
-                          </Typography>
-                        </Box>
-                      </Paper>
-                    </Grid>
-                    <Grid container xs={12} alignContent="flex-start">
-                      <Chip icon={<ConstructionIcon />} label="Try it out" />
-                    </Grid>
-                    <Grid item xs={12} style={{ marginBottom: '20px' }}>
-                      <Paper sx={{ p: 2 }}>
-                        <Box
-                          sx={{
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'flex-start',
-                          }}
-                        >
-                          <TextField
-                            label="Submit your answer"
-                            sx={{ mb: 2, width: '300px' }}
-                          />
-                          <Button variant="contained">Submit</Button>
-                        </Box>
-                      </Paper>
-                    </Grid>
-                  </Fragment>
-                )}
-            </Grid>
-          </Box>
-        </TabPanel>
-      ))}
+            </Box>
+          </TabPanel>
+        ))
+      }
     </Box>
   );
 }
