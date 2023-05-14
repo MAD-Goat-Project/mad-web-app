@@ -1,27 +1,57 @@
 import Grid from '@mui/material/Grid';
-import { Box, Chip, Paper, TextField } from '@mui/material';
+import { Alert, Box, Chip, Paper, Snackbar, TextField } from '@mui/material';
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 import Typography from '@mui/material/Typography';
 import ConstructionIcon from '@mui/icons-material/Construction';
 import Button from '@mui/material/Button';
 import * as React from 'react';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import {
   IAssessment,
   IAssessmentType,
 } from '../../models/assessment.interface';
+import { validateAnswer } from '../../utils/answers.utils';
 
+interface ISnackbarProps {
+  open: boolean;
+  vertical: 'top' | 'bottom';
+  horizontal: 'left' | 'center' | 'right';
+  message: string;
+  severity: 'success' | 'info' | 'warning' | 'error';
+}
 export function AssessmentContainer({
   assessment,
-  validateAnswerHandler,
-  answer,
-  setAnswer,
 }: {
   assessment: IAssessment;
-  validateAnswerHandler: () => void;
-  answer: string;
-  setAnswer: (answer: string) => void;
 }) {
+  const [answer, setAnswer] = useState('');
+  const [snackbarProps, setShowSnackbar] = useState<ISnackbarProps>({
+    open: false,
+    vertical: 'bottom',
+    horizontal: 'right',
+    message: '',
+    severity: 'error',
+  });
+
+  function validateAnswerHandler() {
+    // TODO: Use React Query
+    validateAnswer(assessment.id, answer).then((response) => {
+      if (response) {
+        return setShowSnackbar({
+          ...snackbarProps,
+          open: true,
+          message: 'Correct Answer!',
+          severity: 'success',
+        });
+      }
+      return setShowSnackbar({
+        ...snackbarProps,
+        open: true,
+        message: 'Incorrect Answer!',
+        severity: 'error',
+      });
+    });
+  }
   if (
     assessment.type === IAssessmentType.INTRODUCTION ||
     assessment.type === IAssessmentType.CONCLUSION
@@ -31,6 +61,18 @@ export function AssessmentContainer({
 
   return (
     <Fragment>
+      <Snackbar
+        anchorOrigin={{
+          vertical: snackbarProps.vertical,
+          horizontal: snackbarProps.horizontal,
+        }}
+        open={snackbarProps.open}
+        onClose={() => setShowSnackbar({ ...snackbarProps, open: false })}
+        autoHideDuration={4000}
+        key={'bottom-right'}
+      >
+        <Alert severity={snackbarProps.severity}>{snackbarProps.message}</Alert>
+      </Snackbar>
       <Grid container xs={12} alignContent="flex-start">
         <Chip icon={<CrisisAlertIcon />} label="Goal" />
       </Grid>

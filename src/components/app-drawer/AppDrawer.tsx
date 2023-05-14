@@ -17,6 +17,7 @@ import { DrawerListItemButton } from './DrawerListItemButton';
 
 const drawerWidth = 240;
 
+// TODO: Refactor this component
 export function AppDrawer({
   openDrawer,
   setOpenState,
