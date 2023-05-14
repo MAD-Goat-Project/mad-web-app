@@ -3,7 +3,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import * as React from 'react';
-import Categories from '../../api/categories.api';
+import CategoriesAPI from '../../api/categories.api';
 import { useQuery } from 'react-query';
 import { Alert, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
@@ -15,7 +15,7 @@ interface ICategory {
 }
 export function ListDrawer() {
   const { data, isLoading, error } = useQuery('categories', async () =>
-    Categories.get().then((res) => res.data)
+    CategoriesAPI.get().then((res) => res.data)
   );
   const categoriesList: ICategory[] = data;
 

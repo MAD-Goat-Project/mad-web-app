@@ -2,8 +2,8 @@ import LessonCard from '../../components/card/LessonCard';
 import { Alert, CircularProgress, Grid, Pagination } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Categories from '../../api/categories.api';
-import Lessons, { ILesson } from '../../api/lessons.api';
+import CategoriesAPI from '../../api/categories.api';
+import LessonsAPI, { ILesson } from '../../api/lessons.api';
 import { useQuery } from 'react-query';
 
 const pageSize = 3;
@@ -17,9 +17,9 @@ function LessonPage() {
     error,
     refetch,
   } = useQuery<ILesson[]>('lessons', async () => {
-    const id: number = await Categories.getCategoryId(category);
+    const id: number = await CategoriesAPI.getCategoryId(category);
 
-    return Lessons.get(id);
+    return LessonsAPI.get(id);
   });
 
   const [currentPage, setCurrentPage] = useState(1);

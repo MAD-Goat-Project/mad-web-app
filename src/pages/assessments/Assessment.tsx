@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import Assessments from '../../api/assessments.api';
+import AssessmentsAPI from '../../api/assessments.api';
 import { TabsComponent } from '../../components/tabs/Tabs';
 import { IAssessment } from '../../models/assessment.interface';
 
@@ -17,7 +17,7 @@ function AssessmentPage() {
     refetch,
   } = useQuery<IAssessment[]>('assessments', async () => {
     const id: number = parseInt(lessonId) || 0;
-    return Assessments.get(id);
+    return AssessmentsAPI.get(id);
   });
 
   useEffect(() => {

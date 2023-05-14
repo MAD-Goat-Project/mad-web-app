@@ -9,9 +9,9 @@ async function getCategoryId(name: string) {
     .then((res) => res.data[0].id);
 }
 
-const Categories = {
+const CategoriesAPI = {
   get,
   getCategoryId,
 };
 
-export default Categories;
+export default CategoriesAPI;

@@ -11,7 +11,7 @@ async function get(category: number): Promise<ILesson[]> {
     .then((res) => res.data);
 }
 
-const Lessons = {
+const LessonsAPI = {
   get,
 };
-export default Lessons;
+export default LessonsAPI;

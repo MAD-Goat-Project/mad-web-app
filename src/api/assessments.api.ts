@@ -3,11 +3,11 @@ import { IAssessment } from '../models/assessment.interface';
 
 async function get(lessonId: number): Promise<IAssessment[]> {
   return api()
-    .get(`/assessments/`, { params: { lessonId } })
+    .get(`/lessons/${lessonId}/assessments/`)
     .then((res) => res.data);
 }
 
-const Assessments = {
+const AssessmentsAPI = {
   get,
 };
-export default Assessments;
+export default AssessmentsAPI;
