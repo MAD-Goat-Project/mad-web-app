@@ -68,9 +68,10 @@ export function AssessmentContainer({
       >
         <Alert severity={snackbarProps.severity}>{snackbarProps.message}</Alert>
       </Snackbar>
-      <Grid container xs={12} alignContent="flex-start">
+      <Grid item container xs={12} alignContent="flex-start">
         <Chip icon={<DescriptionIcon />} label="Description" />
       </Grid>
+
       <Grid item xs={12} style={{ marginBottom: '20px' }}>
         <Paper
           sx={{
@@ -95,7 +96,7 @@ export function AssessmentContainer({
       {assessment.type !== IAssessmentType.INTRODUCTION &&
         assessment.type !== IAssessmentType.CONCLUSION && (
           <Fragment>
-            <Grid container xs={12} alignContent="flex-start">
+            <Grid item container xs={12} alignContent="flex-start">
               <Chip icon={<CrisisAlertIcon />} label="Goal" />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '20px' }}>
@@ -107,7 +108,7 @@ export function AssessmentContainer({
                 </Box>
               </Paper>
             </Grid>
-            <Grid container xs={12} alignContent="flex-start">
+            <Grid item container xs={12} alignContent="flex-start">
               <Chip icon={<ConstructionIcon />} label="Try it out" />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '20px' }}>

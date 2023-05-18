@@ -51,6 +51,16 @@ export function Avatar() {
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
+        <MenuItem
+          onClick={() => {
+            console.log(keycloak.token);
+            keycloak.loadUserInfo().then((userInfo) => {
+              console.log(userInfo);
+            });
+          }}
+        >
+          Test
+        </MenuItem>
       </Menu>
     </div>
   );
