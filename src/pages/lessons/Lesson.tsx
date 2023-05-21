@@ -2,8 +2,8 @@ import LessonCard from '../../components/card/LessonCard';
 import { Alert, CircularProgress, Grid, Pagination } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CategoriesAPI from '../../api/categories.api';
-import LessonsAPI, { ILesson } from '../../api/lessons.api';
+import CategoriesAPI from '../../api/lessons-api/categories.api';
+import LessonsAPI, { ILesson } from '../../api/lessons-api/lessons.api';
 import { useQuery } from 'react-query';
 
 const pageSize = 3;

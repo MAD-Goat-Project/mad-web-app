@@ -57,6 +57,9 @@ export function Avatar() {
             keycloak.loadUserInfo().then((userInfo) => {
               console.log(userInfo);
             });
+            navigator.clipboard
+              .writeText(keycloak.token ? keycloak.token : '')
+              .then(() => console.log('Token copied to clipboard.'));
           }}
         >
           Test

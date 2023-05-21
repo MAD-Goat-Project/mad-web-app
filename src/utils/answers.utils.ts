@@ -1,4 +1,4 @@
-import answersApi from '../api/answers.api';
+import answersApi from '../api/lessons-api/answers.api';
 import { IAnswer } from '../models/answer.interface';
 
 export async function validateAnswer(

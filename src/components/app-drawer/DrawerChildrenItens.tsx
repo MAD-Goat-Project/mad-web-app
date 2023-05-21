@@ -3,7 +3,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import * as React from 'react';
-import CategoriesAPI from '../../api/categories.api';
+import CategoriesAPI from '../../api/lessons-api/categories.api';
 import { useQuery } from 'react-query';
 import { Alert, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';

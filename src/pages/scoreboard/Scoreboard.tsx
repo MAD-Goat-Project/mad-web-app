@@ -1,13 +1,13 @@
-import { Alert, CircularProgress } from '@mui/material';
-import * as React from 'react';
-import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import AssessmentsAPI from '../../api/lessons-api/assessments.api';
-import { TabsComponent } from '../../components/tabs/Tabs';
 import { IAssessment } from '../../models/assessment.interface';
+import AssessmentsAPI from '../../api/lessons-api/assessments.api';
+import * as React from 'react';
+import { useEffect } from 'react';
+import { Alert, CircularProgress } from '@mui/material';
+import BasicModal from '../../components/modal/BasicModal';
 
-function AssessmentPage() {
+function ScoreboardPage() {
   const { lessonId = '' } = useParams<{ lessonId: string }>();
 
   const {
@@ -36,15 +36,20 @@ function AssessmentPage() {
     return (
       <div>
         <Alert severity="error">
-          Unable to load assessments, please try again later!{' '}
+          Unable to load scoreboards, please try again later!{' '}
         </Alert>
       </div>
     );
   }
 
-  return <TabsComponent assessments={assessments ?? []} />;
+  return (
+    <div>
+      <h1>Scoreboard</h1>
+      <BasicModal></BasicModal>
+    </div>
+  );
 }
 
-export default function Assessment() {
-  return <AssessmentPage />;
+export default function Scoreboard() {
+  return <ScoreboardPage />;
 }

@@ -1,8 +1,8 @@
-import { api } from './configs/axiosConfig';
-import { IAssessment } from '../models/assessment.interface';
+import { lessonsApi } from '../configs/axiosConfig';
+import { IAssessment } from '../../models/assessment.interface';
 
 async function get(lessonId: number): Promise<IAssessment[]> {
-  return api()
+  return lessonsApi()
     .get(`/lessons/${lessonId}/assessments/`)
     .then((res) => res.data);
 }

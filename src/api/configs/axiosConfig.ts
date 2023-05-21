@@ -1,11 +1,13 @@
-import axios, { AxiosInstance } from 'axios';
-import { setupInterceptors } from './axiosInterceptors';
+import { APIClient } from './APIClient';
 
-export function api(): AxiosInstance {
-  const baseURL: string = import.meta.env.VITE_BASE_URL as string;
-  const axiosInstance = axios.create({
-    baseURL,
-  });
+const lessonsApi = () => {
+  const baseURL = import.meta.env.VITE_LESSON_BASE_URL as string;
+  return new APIClient(baseURL).getAxiosInstance();
+};
 
-  return setupInterceptors(axiosInstance);
-}
+const scoreboardApi = () => {
+  const baseURL = import.meta.env.VITE_SCOREBOARD_BASE_URL as string;
+  return new APIClient(baseURL).getAxiosInstance();
+};
+
+export { lessonsApi, scoreboardApi };

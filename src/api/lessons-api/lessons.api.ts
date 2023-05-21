@@ -1,4 +1,4 @@
-import { api } from './configs/axiosConfig';
+import { lessonsApi } from '../configs/axiosConfig';
 
 export interface ILesson {
   id: number;
@@ -6,7 +6,7 @@ export interface ILesson {
   description: string;
 }
 async function get(category: number): Promise<ILesson[]> {
-  return api()
+  return lessonsApi()
     .get(`/categories/${category}/lessons`)
     .then((res) => res.data);
 }
