@@ -9,48 +9,53 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import SchoolIcon from '@mui/icons-material/School';
 import { BugReport, Speed } from '@mui/icons-material';
+import MadGoatHorizontal from '../../assets/mad-horizontal.svg';
 
 const tiers = [
   {
     icon: SchoolIcon,
     title: 'Educational',
-    description: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit'],
+    description: [
+      'Fortify Your Skills:',
+      'Immerse Yourself in MAD Goat Interactive Lessons on the main MAD Building Blocks, Vulnerabilities, and Fixes!',
+    ],
   },
   {
     icon: BugReport,
     title: 'Vulnerable by nature',
-    description: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit'],
+    description: [
+      "Unlock MAD's Secrets:",
+      'All of MAD Goat as security vulnerabilities. Explore and Conquer its Multitude of Attack Vectors!',
+    ],
   },
   {
     icon: Speed,
     title: 'A benchmark tool',
-    description: ['Lorem ipsum dolor sit amet, consectetur adipiscing elit'],
+    description: [
+      'Ignite Your Insights:',
+      'Assess the Efficiency of Your AST Tools, Identify Core Vulnerabilities, and Generate Quality Reports!',
+    ],
   },
 ];
 
 function HomePage() {
+  const madImageSize = { width: '65%', height: 'auto', marginBottom: '1em' };
+
   return (
     <React.Fragment>
-      <Container disableGutters component="main" sx={{ pt: 8, pb: 6 }}>
-        <Typography
-          component="h1"
-          variant="h2"
-          align="center"
-          color="text.primary"
-          gutterBottom
-          marginBottom={'1em'}
-        >
-          MAD Goat Project
-        </Typography>
+      <Container disableGutters component="main" sx={{ pt: 5, pb: 6 }}>
+        <img
+          src={MadGoatHorizontal}
+          style={madImageSize}
+          alt="MAD Goat project logo"
+        />
         <Typography
           variant="h5"
           align="center"
           color="text.secondary"
           component="p"
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          facilisis felis non commodo consequat. Suspendisse fermentum orci id
-          orci cursus, non finibus augue facilisis.
+          Embrace the Power of Modern Application Development!
         </Typography>
       </Container>
       <Container maxWidth="md" component="main">
@@ -86,7 +91,7 @@ function HomePage() {
                     {tier.description.map((line) => (
                       <Typography
                         component="li"
-                        variant="subtitle1"
+                        variant="body1"
                         align="center"
                         key={line}
                       >

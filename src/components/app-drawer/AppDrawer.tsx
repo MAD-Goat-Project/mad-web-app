@@ -1,10 +1,9 @@
 import IconButton from '@mui/material/IconButton';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import Divider from '@mui/material/Divider';
 import List from '@mui/material/List';
-import Drawer from '@mui/material/Drawer';
 
+import Drawer from '@mui/material/Drawer';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
@@ -14,6 +13,7 @@ import PropTypes from 'prop-types';
 import { ListDrawer } from './DrawerChildrenItens';
 import { Link } from 'react-router-dom';
 import { DrawerListItemButton } from './DrawerListItemButton';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 const drawerWidth = 240;
 
@@ -80,7 +80,7 @@ export function AppDrawer({
       <DrawerHeader>
         <IconButton onClick={handleDrawerClose}>
           {theme.direction === 'ltr' ? (
-            <ChevronLeftIcon />
+            <MenuOpenIcon color={'primary'} />
           ) : (
             <ChevronRightIcon />
           )}

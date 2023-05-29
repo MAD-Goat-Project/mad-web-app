@@ -7,7 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import { Avatar } from '../avatar/Avatar';
 import Grid from '@mui/material/Grid';
-import MADHorizontal from '../../assets/mad-horizontal.svg';
+import MenuIcon from '@mui/icons-material/Menu';
 import { AppDrawer } from '../app-drawer/AppDrawer';
 
 const drawerWidth = 240;
@@ -43,8 +43,6 @@ export default function PersistentDrawerLeft() {
     setOpen(true);
   };
 
-  const madImageSize = { width: '100px', height: '50px' };
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '10vh' }}>
       <CssBaseline />
@@ -57,13 +55,7 @@ export default function PersistentDrawerLeft() {
             edge="start"
             sx={{ mr: 2, ...(open && { display: 'none' }) }}
           >
-            {
-              <img
-                src={MADHorizontal}
-                alt="MAD Goat Logo"
-                style={madImageSize}
-              />
-            }
+            <MenuIcon color={'primary'} />
           </IconButton>
           <Grid container justifyContent="flex-end">
             <Avatar />

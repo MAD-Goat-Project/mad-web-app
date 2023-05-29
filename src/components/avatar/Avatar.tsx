@@ -31,7 +31,7 @@ export function Avatar() {
         onClick={handleMenu}
         color="secondary"
       >
-        <AccountCircle />
+        <AccountCircle color={'primary'} />
       </IconButton>
       <Menu
         id="menu-appbar"
