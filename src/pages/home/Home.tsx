@@ -7,36 +7,8 @@ import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import SchoolIcon from '@mui/icons-material/School';
-import { BugReport, Speed } from '@mui/icons-material';
 import MadGoatHorizontal from '../../assets/mad-horizontal.svg';
-
-const tiers = [
-  {
-    icon: SchoolIcon,
-    title: 'Educational',
-    description: [
-      'Fortify Your Skills:',
-      'Immerse Yourself in MAD Goat Interactive Lessons on the main MAD Building Blocks, Vulnerabilities, and Fixes!',
-    ],
-  },
-  {
-    icon: BugReport,
-    title: 'Vulnerable by nature',
-    description: [
-      "Unlock MAD's Secrets:",
-      'All of MAD Goat as security vulnerabilities. Explore and Conquer its Multitude of Attack Vectors!',
-    ],
-  },
-  {
-    icon: Speed,
-    title: 'A benchmark tool',
-    description: [
-      'Ignite Your Insights:',
-      'Assess the Efficiency of Your AST Tools, Identify Core Vulnerabilities, and Generate Quality Reports!',
-    ],
-  },
-];
+import { madObjectives } from './mad-objectives';
 
 function HomePage() {
   const madImageSize = { width: '65%', height: 'auto', marginBottom: '1em' };
@@ -60,7 +32,7 @@ function HomePage() {
       </Container>
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
-          {tiers.map((tier) => (
+          {madObjectives.map((tier) => (
             // Enterprise card is full width at sm breakpoint
             <Grid item key={tier.title} xs={12} md={4}>
               <Card>
