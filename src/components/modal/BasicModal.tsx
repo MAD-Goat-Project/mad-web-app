@@ -68,7 +68,11 @@ export default function BasicModal() {
             Random gamer tag
           </Button>
           <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Button variant="contained" sx={{ mt: 2, mr: 2 }}>
+            <Button
+              variant="contained"
+              sx={{ mt: 2, mr: 2 }}
+              onClick={closeModal}
+            >
               Cancel
             </Button>
             <Button variant="contained" sx={{ mt: 2 }} onClick={closeModal}>
