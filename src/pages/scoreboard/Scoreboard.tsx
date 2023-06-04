@@ -1,28 +1,26 @@
-import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
-import { IAssessment } from '../../models/assessment.interface';
-import AssessmentsAPI from '../../api/lessons-api/assessments.api';
 import * as React from 'react';
 import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import UsersApi from '../../api/scoreboard-api/users.api';
+import keycloak from '../../configurations/keycloak';
 import { Alert, CircularProgress } from '@mui/material';
 import BasicModal from '../../components/modal/BasicModal';
 
 function ScoreboardPage() {
-  const { lessonId = '' } = useParams<{ lessonId: string }>();
+  const [gamerTag, setGamerTag] = React.useState('');
 
   const {
-    data: assessments,
+    data: userExists,
     isLoading,
     error,
     refetch,
-  } = useQuery<IAssessment[]>('assessments', async () => {
-    const id: number = parseInt(lessonId) || 0;
-    return AssessmentsAPI.get(id);
-  });
+  } = useQuery<boolean>('scoreboard', async () =>
+    UsersApi.getClient(keycloak.idTokenParsed?.sub ?? '')
+  );
 
   useEffect(() => {
-    refetch(); // TODO: Refetch the data when the currentPage changes
-  }, [lessonId]);
+    refetch();
+  }, [refetch, gamerTag]);
 
   if (isLoading) {
     return (
@@ -44,8 +42,24 @@ function ScoreboardPage() {
 
   return (
     <div>
-      <h1>Scoreboard</h1>
-      <BasicModal></BasicModal>
+      {userExists ? (
+        <div>
+          <h1>Scoreboard</h1>
+          <h2>Welcome {gamerTag}!</h2>
+        </div>
+      ) : (
+        <>
+          <Alert severity="warning">
+            You need to create a gamer tag to access the scoreboard!
+          </Alert>
+          <BasicModal
+            gamerTag={gamerTag}
+            setGamerTag={setGamerTag}
+            buttonText={'Create Gamer Tag'}
+            openModal={true}
+          />
+        </>
+      )}
     </div>
   );
 }

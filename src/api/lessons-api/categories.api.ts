@@ -1,5 +1,7 @@
 import { lessonsApi } from '../configs/axiosConfig';
 
+//TODO: The API files should contain only the API calls, not the logic
+
 async function get() {
   return lessonsApi().get('/categories');
 }

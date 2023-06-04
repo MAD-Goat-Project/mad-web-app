@@ -3,9 +3,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { FormControl, TextField } from '@mui/material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import { FormControl, TextField, Tooltip } from '@mui/material';
 import usersAPI from '../../api/scoreboard-api/users.api';
+import InfoIcon from '@mui/icons-material/Info';
+import PropTypes from 'prop-types';
+import keycloak from '../../configurations/keycloak';
 
 const style = {
   position: 'absolute',
@@ -19,9 +21,19 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
-  const [open, setOpen] = React.useState(false);
-  const [gamerTag, setGamerTag] = React.useState('');
+export default function BasicModal({
+  gamerTag,
+  setGamerTag,
+  buttonText,
+  openModal,
+}: {
+  gamerTag: string;
+  setGamerTag: React.Dispatch<React.SetStateAction<string>>;
+  buttonText: string;
+  openModal: boolean;
+}) {
+  const [open, setOpen] = React.useState(openModal);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -31,13 +43,27 @@ export default function BasicModal() {
     });
   }
 
+  function createNewUser() {
+    keycloak.loadUserProfile().then((userInfo) => {
+      if (userInfo.id) {
+        usersAPI.createNewUser(userInfo.id, gamerTag).then((response) => {
+          if (response.status === 201) {
+            setOpen(false);
+          } else {
+            alert('Something went wrong, please try again later.');
+          }
+        });
+      }
+    });
+  }
+
   function closeModal() {
     setOpen(false);
   }
 
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen}>{buttonText}</Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -45,10 +71,31 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <AccountCircle sx={{ fontSize: 40 }} />
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            User Profile
-          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              style={{ marginLeft: '10px' }}
+            >
+              Gamer tag
+            </Typography>
+            <Tooltip
+              title={
+                'To participate in the scoreboard, you need to choose a gamer tag.\n'
+              }
+            >
+              <InfoIcon
+                sx={{ fontSize: 20, marginLeft: '10px', cursor: 'pointer' }}
+              />
+            </Tooltip>
+          </div>
+
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <FormControl>
               <TextField
@@ -75,7 +122,7 @@ export default function BasicModal() {
             >
               Cancel
             </Button>
-            <Button variant="contained" sx={{ mt: 2 }} onClick={closeModal}>
+            <Button variant="contained" sx={{ mt: 2 }} onClick={createNewUser}>
               Save
             </Button>
           </div>
@@ -84,3 +131,8 @@ export default function BasicModal() {
     </div>
   );
 }
+
+BasicModal.propTypes = {
+  buttonText: PropTypes.string.isRequired,
+  openModal: PropTypes.bool.isRequired,
+};

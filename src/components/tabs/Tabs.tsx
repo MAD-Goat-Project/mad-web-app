@@ -6,6 +6,9 @@ import { transformAssessmentType } from '../../utils/assessments.utils';
 import { TabPanel } from './TabsPanel';
 import Grid from '@mui/material/Grid';
 import { AssessmentContainer } from '../assessment-container/AssessmentContainer';
+import Button from '@mui/material/Button';
+import keycloak from '../../configurations/keycloak';
+import UserAssessmentAPI from '../../api/lessons-api/assessment-lesson-progress.api';
 
 function a11yProps(index: number) {
   return {
@@ -18,6 +21,30 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+  };
+
+  function markAssessment() {
+    console.log('Marking assessment');
+    console.log(assessments);
+    const assessmentId: number = assessments[value].id;
+    const token: string = keycloak.idTokenParsed?.sub ?? '';
+    return UserAssessmentAPI.post(token, assessmentId, 2);
+  }
+
+  const getTabIndicatorColor = (index: number): string => {
+    const assessment = assessments[index];
+    const status = assessment.status;
+    console.log(status);
+    switch (status) {
+      case 0:
+        return 'black';
+      case 1:
+        return 'blue';
+      case 2:
+        return 'green';
+      default:
+        return 'blue';
+    }
   };
 
   return (
@@ -34,6 +61,9 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
               label={transformAssessmentType(assessment.type)}
               {...a11yProps(index)}
               key={assessment.id}
+              sx={{
+                color: getTabIndicatorColor(index), // Compute the text color based on the current tab index
+              }}
             />
           ))}
         </Tabs>
@@ -50,6 +80,18 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
           </TabPanel>
         ))
       }
+
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 2 }}>
+        {assessments[value].status === 2 ? (
+          <Button variant="contained" color="success" disabled>
+            Completed
+          </Button>
+        ) : (
+          <Button variant="contained" color="success" onClick={markAssessment}>
+            Complete
+          </Button>
+        )}
+      </Box>
     </Box>
   );
 }

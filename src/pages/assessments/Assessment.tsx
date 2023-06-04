@@ -6,10 +6,14 @@ import { useQuery } from 'react-query';
 import AssessmentsAPI from '../../api/lessons-api/assessments.api';
 import { TabsComponent } from '../../components/tabs/Tabs';
 import { IAssessment } from '../../models/assessment.interface';
+import keycloak from '../../configurations/keycloak';
+import UserAssessmentAPI from '../../api/lessons-api/assessment-lesson-progress.api';
 
 function AssessmentPage() {
   const { lessonId = '' } = useParams<{ lessonId: string }>();
 
+  // TODO: This join can be done on the API Level with only one request
+  // TODO: Also if udefined default to 0
   const {
     data: assessments,
     isLoading,
@@ -17,7 +21,28 @@ function AssessmentPage() {
     refetch,
   } = useQuery<IAssessment[]>('assessments', async () => {
     const id: number = parseInt(lessonId) || 0;
-    return AssessmentsAPI.get(id);
+    const assessmentArray = await AssessmentsAPI.get(id);
+    const assessmentPromises = assessmentArray.map(async (assessment) => {
+      const response = await UserAssessmentAPI.get(
+        keycloak.idTokenParsed?.sub ?? '',
+        assessment.id
+      );
+      if (response.status === 200) {
+        return {
+          ...assessment,
+          status: response.data.status,
+        };
+      } else {
+        return {
+          ...assessment,
+          status: 0,
+        };
+      }
+    });
+    // TODO: Validate that the same user cannot have the same lesson progress twice
+    // TODO: One line
+    const asssessmentWithProgress = await Promise.all(assessmentPromises);
+    return asssessmentWithProgress;
   });
 
   useEffect(() => {

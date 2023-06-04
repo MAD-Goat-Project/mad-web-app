@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import CategoriesAPI from '../../api/lessons-api/categories.api';
 import LessonsAPI, { ILesson } from '../../api/lessons-api/lessons.api';
 import { useQuery } from 'react-query';
+import keycloak from '../../configurations/keycloak';
+import UserProgressAPI from '../../api/lessons-api/user-lesson-progress.api';
 
 const pageSize = 3;
 
@@ -18,8 +20,29 @@ function LessonPage() {
     refetch,
   } = useQuery<ILesson[]>('lessons', async () => {
     const id: number = await CategoriesAPI.getCategoryId(category);
+    const lessonArray = await LessonsAPI.get(id);
+    // TODO: Validate that the same user cannot have the same lesson progress twice
 
-    return LessonsAPI.get(id);
+    const lessonPromises = lessonArray.map(async (lesson) => {
+      const response = await UserProgressAPI.get(
+        keycloak.idTokenParsed?.sub ?? '',
+        lesson.id
+      );
+      if (response.status === 200) {
+        return {
+          ...lesson,
+          status: response.data.status,
+        };
+      } else {
+        return {
+          ...lesson,
+          status: 0,
+        };
+      }
+    });
+
+    const lessonsWithProgress = await Promise.all(lessonPromises);
+    return lessonsWithProgress;
   });
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -64,6 +87,7 @@ function LessonPage() {
               description={lesson.description}
               lessonId={lesson.id}
               category={category}
+              progress={lesson.status ? lesson.status : 0}
             />
           </Grid>
         ))}
