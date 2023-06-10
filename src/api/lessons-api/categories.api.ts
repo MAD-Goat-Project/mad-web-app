@@ -1,14 +1,15 @@
 import { lessonsApi } from '../configs/axiosConfig';
+import { AxiosResponse } from 'axios';
+import { ICategory } from '../../models/category.interface';
 
-//TODO: The API files should contain only the API calls, not the logic
-
+const CATEGORIES_BASE_ENDPOINT = '/categories';
 async function get() {
-  return lessonsApi().get('/categories');
+  return lessonsApi().get(CATEGORIES_BASE_ENDPOINT);
 }
-async function getCategoryId(name: string) {
-  return lessonsApi()
-    .get(`/categories?name=${name}`)
-    .then((res) => res.data[0].id);
+async function getCategoryId(
+  name: string
+): Promise<AxiosResponse<ICategory[]>> {
+  return lessonsApi().get(`${CATEGORIES_BASE_ENDPOINT}?name=${name}`);
 }
 
 const CategoriesAPI = {

@@ -11,6 +11,7 @@ export interface IAssessment {
   type: IAssessmentType;
   description: string;
   goal: string;
+  status?: number;
   quiz?: string[];
   lesson_id: ILesson;
 }

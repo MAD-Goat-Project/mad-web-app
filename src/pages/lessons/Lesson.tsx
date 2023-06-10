@@ -3,10 +3,11 @@ import { Alert, CircularProgress, Grid, Pagination } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CategoriesAPI from '../../api/lessons-api/categories.api';
-import LessonsAPI, { ILesson } from '../../api/lessons-api/lessons.api';
+import LessonsAPI from '../../api/lessons-api/lessons.api';
 import { useQuery } from 'react-query';
 import keycloak from '../../configurations/keycloak';
 import UserProgressAPI from '../../api/lessons-api/user-lesson-progress.api';
+import { ILesson } from '../../models/lesson.interface';
 
 const pageSize = 3;
 
@@ -19,8 +20,14 @@ function LessonPage() {
     error,
     refetch,
   } = useQuery<ILesson[]>('lessons', async () => {
-    const id: number = await CategoriesAPI.getCategoryId(category);
-    const lessonArray = await LessonsAPI.get(id);
+    const id: number = await CategoriesAPI.getCategoryId(category).then(
+      (response) => {
+        return response.data[0].id;
+      }
+    );
+    const lessonArray = await LessonsAPI.get(id).then(
+      (response) => response.data
+    );
     // TODO: Validate that the same user cannot have the same lesson progress twice
 
     const lessonPromises = lessonArray.map(async (lesson) => {

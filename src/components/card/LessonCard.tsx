@@ -5,10 +5,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardMedia, Chip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import UserLessonProgressApi, {
-  LessonStatus,
-} from '../../api/lessons-api/user-lesson-progress.api';
+import UserLessonProgressApi from '../../api/lessons-api/user-lesson-progress.api';
 import keycloak from '../../configurations/keycloak';
+import { LessonStatus } from '../../models/user-lesson-progress.interface';
 
 export default function LessonCard({
   title,

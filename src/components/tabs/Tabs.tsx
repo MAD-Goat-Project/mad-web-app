@@ -13,13 +13,12 @@ import { TabPanel } from './TabsPanel';
 import Grid from '@mui/material/Grid';
 import { AssessmentContainer } from '../assessment-container/AssessmentContainer';
 import keycloak from '../../configurations/keycloak';
-import UserAssessmentAPI from '../../api/lessons-api/assessment-lesson-progress.api';
+import UserAssessmentAPI from '../../api/lessons-api/user-assessment-progress.api';
 import { useLocation, useNavigate } from 'react-router-dom';
 import UserProgressAPI from '../../api/lessons-api/user-lesson-progress.api';
-import UserLessonProgressApi, {
-  LessonStatus,
-} from '../../api/lessons-api/user-lesson-progress.api';
+import UserLessonProgressApi from '../../api/lessons-api/user-lesson-progress.api';
 import Button from '@mui/material/Button';
+import { LessonStatus } from '../../models/user-lesson-progress.interface';
 
 function a11yProps(index: number) {
   return {
@@ -53,7 +52,6 @@ export function TabsComponent({
   }
 
   async function markLesson() {
-    const assessmentId: number = assessments[value].id;
     const lessonId: number = assessments[value].lesson_id.id;
     const token: string = keycloak.idTokenParsed?.sub ?? '';
     const assessmentProgressId = await UserProgressAPI.get(

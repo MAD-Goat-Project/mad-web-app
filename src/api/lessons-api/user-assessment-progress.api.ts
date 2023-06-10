@@ -1,23 +1,18 @@
 import { lessonsApi } from '../configs/axiosConfig';
 import { AxiosResponse } from 'axios';
+import {
+  AssessmentStatus,
+  IUserAssessmentProgress,
+} from '../../models/user-assessment-progress.interface';
 
-// TODO: remove hard coding of URL assessment-progress
-enum AssessmentStatus {
-  NOT_STARTED = 0,
-  IN_PROGRESS = 1,
-  COMPLETED = 2,
-}
-export interface IUserAssessmentProgress {
-  id: number;
-  user_id: string;
-  status: AssessmentStatus;
-}
+const USER_PROGRESS_BASE_ENDPOINT = '/assessment-progress';
+
 async function get(
   userId: string,
   assessmentId: number
 ): Promise<AxiosResponse<IUserAssessmentProgress>> {
   return lessonsApi().get(
-    `/assessment-progress/user/${userId}/assessment/${assessmentId}`
+    `${USER_PROGRESS_BASE_ENDPOINT}/user/${userId}/assessment/${assessmentId}`
   );
 }
 
@@ -26,7 +21,7 @@ async function patch(
   lessonId: number,
   status: AssessmentStatus
 ): Promise<AxiosResponse<IUserAssessmentProgress>> {
-  return lessonsApi().patch('/assessment-progress', {
+  return lessonsApi().patch(USER_PROGRESS_BASE_ENDPOINT, {
     user_id: userId,
     lesson_id: lessonId,
     status,
@@ -38,7 +33,7 @@ async function post(
   assessmentId: number,
   status: AssessmentStatus
 ): Promise<AxiosResponse<IUserAssessmentProgress>> {
-  return lessonsApi().post('/assessment-progress', {
+  return lessonsApi().post(USER_PROGRESS_BASE_ENDPOINT, {
     user_id: userId,
     assessment_id: assessmentId,
     status,
@@ -46,6 +41,7 @@ async function post(
 }
 const UserAssessmentAPI = {
   get,
+  patch,
   post,
 };
 export default UserAssessmentAPI;

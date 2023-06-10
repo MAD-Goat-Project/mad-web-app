@@ -7,7 +7,7 @@ import AssessmentsAPI from '../../api/lessons-api/assessments.api';
 import { TabsComponent } from '../../components/tabs/Tabs';
 import { IAssessment } from '../../models/assessment.interface';
 import keycloak from '../../configurations/keycloak';
-import UserAssessmentAPI from '../../api/lessons-api/assessment-lesson-progress.api';
+import UserAssessmentAPI from '../../api/lessons-api/user-assessment-progress.api';
 
 function AssessmentPage() {
   const { lessonId = '' } = useParams<{ lessonId: string }>();
@@ -21,12 +21,16 @@ function AssessmentPage() {
     refetch,
   } = useQuery<IAssessment[]>('assessments', async () => {
     const id: number = parseInt(lessonId) || 0;
-    const assessmentArray = await AssessmentsAPI.get(id);
+    const assessmentArray = await AssessmentsAPI.get(id).then(
+      (response) => response.data
+    );
+
     const assessmentPromises = assessmentArray.map(async (assessment) => {
       const response = await UserAssessmentAPI.get(
         keycloak.idTokenParsed?.sub ?? '',
         assessment.id
       );
+
       if (response.status === 200) {
         return {
           ...assessment,

@@ -1,12 +1,9 @@
 import { lessonsApi } from '../configs/axiosConfig';
 import { ILesson } from '../../models/lesson.interface';
+import { AxiosResponse } from 'axios';
 
-//TODO: The API files should contain only the API calls, not the logic
-
-async function get(category: number): Promise<ILesson[]> {
-  return lessonsApi()
-    .get(`/categories/${category}/lessons`)
-    .then((res) => res.data);
+async function get(category: number): Promise<AxiosResponse<ILesson[]>> {
+  return lessonsApi().get(`/categories/${category}/lessons`);
 }
 
 const LessonsAPI = {

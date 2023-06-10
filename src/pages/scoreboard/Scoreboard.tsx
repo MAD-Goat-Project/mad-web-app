@@ -5,6 +5,7 @@ import UsersApi from '../../api/scoreboard-api/users.api';
 import keycloak from '../../configurations/keycloak';
 import { Alert, CircularProgress } from '@mui/material';
 import BasicModal from '../../components/modal/BasicModal';
+import { AxiosError } from 'axios';
 
 function ScoreboardPage() {
   const [gamerTag, setGamerTag] = React.useState('');
@@ -16,6 +17,14 @@ function ScoreboardPage() {
     refetch,
   } = useQuery<boolean>('scoreboard', async () =>
     UsersApi.getClient(keycloak.idTokenParsed?.sub ?? '')
+      .then((res) => !!res.data._id)
+      .catch((err: AxiosError) => {
+        if (err.response?.status === 404) {
+          return false;
+        } else {
+          throw err;
+        }
+      })
   );
 
   useEffect(() => {

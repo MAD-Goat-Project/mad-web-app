@@ -7,17 +7,13 @@ import CategoriesAPI from '../../api/lessons-api/categories.api';
 import { useQuery } from 'react-query';
 import { Alert, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { ICategory } from '../../models/category.interface';
 
-interface ICategory {
-  id: number;
-  name: string;
-  full_name: string;
-}
 export function ListDrawer() {
   const { data, isLoading, error } = useQuery('categories', async () =>
     CategoriesAPI.get().then((res) => res.data)
   );
-  const categoriesList: ICategory[] = data;
+  const categoryList: ICategory[] = data;
 
   if (isLoading) {
     return (
@@ -39,7 +35,7 @@ export function ListDrawer() {
 
   return (
     <List component="div" disablePadding>
-      {categoriesList?.map((child) => (
+      {categoryList?.map((child) => (
         <Link
           key={child.id}
           to={`/${child.name}/lessons`}

@@ -1,21 +1,19 @@
 import { lessonsApi } from '../configs/axiosConfig';
 import { AxiosResponse } from 'axios';
+import {
+  IUserLessonProgress,
+  LessonStatus,
+} from '../../models/user-lesson-progress.interface';
 
-export enum LessonStatus {
-  NOT_STARTED = 0,
-  IN_PROGRESS = 1,
-  COMPLETED = 2,
-}
-export interface IUserLessonProgress {
-  id: number;
-  user_id: string;
-  status: LessonStatus;
-}
+const LESSON_PROGRESS_BASE_ENDPOINT = '/lesson-progress';
+
 async function get(
   userId: string,
   lessonId: number
 ): Promise<AxiosResponse<IUserLessonProgress>> {
-  return lessonsApi().get(`/lesson-progress/user/${userId}/lesson/${lessonId}`);
+  return lessonsApi().get(
+    `${LESSON_PROGRESS_BASE_ENDPOINT}/user/${userId}/lesson/${lessonId}`
+  );
 }
 
 async function patch(
@@ -24,7 +22,7 @@ async function patch(
   lessonId: number,
   status: LessonStatus
 ): Promise<AxiosResponse<IUserLessonProgress>> {
-  return lessonsApi().patch(`/lesson-progress/${id}`, {
+  return lessonsApi().patch(`${LESSON_PROGRESS_BASE_ENDPOINT}/${id}`, {
     user_id: userId,
     lesson_id: lessonId,
     status,
@@ -35,7 +33,7 @@ async function post(
   lessonId: number,
   status: LessonStatus
 ): Promise<AxiosResponse<IUserLessonProgress>> {
-  return lessonsApi().post('/lesson-progress', {
+  return lessonsApi().post(LESSON_PROGRESS_BASE_ENDPOINT, {
     user_id: userId,
     lesson_id: lessonId,
     status,

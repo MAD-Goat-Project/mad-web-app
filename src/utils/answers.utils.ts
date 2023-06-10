@@ -8,11 +8,7 @@ export async function validateAnswer(
   const answerBody: IAnswer = {
     answers,
   };
-  //if (answer === '') return false;
-  const isAnswerCorrect = answersApi
-    .validate(assessmentId, answerBody)
-    .then((res) => {
-      return res.isCorrect;
-    });
-  return isAnswerCorrect;
+  return answersApi.validate(assessmentId, answerBody).then((res) => {
+    return res.data.isCorrect;
+  });
 }

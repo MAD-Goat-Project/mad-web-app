@@ -1,15 +1,17 @@
 import { IAnswer, IAnswerResponse } from '../../models/answer.interface';
 import { lessonsApi } from '../configs/axiosConfig';
+import { AxiosResponse } from 'axios';
 
-//TODO: The API files should contain only the API calls, not the logic
+const ASSESSMENTS_BASE_ENDPOINT = '/assessments';
 
 async function validate(
   assessmentId: number,
   answerBody: IAnswer
-): Promise<IAnswerResponse> {
-  return lessonsApi()
-    .post(`/assessments/${assessmentId}/answers/validation`, answerBody)
-    .then((res) => res.data);
+): Promise<AxiosResponse<IAnswerResponse>> {
+  return lessonsApi().post(
+    `${ASSESSMENTS_BASE_ENDPOINT}/${assessmentId}/answers/validation`,
+    answerBody
+  );
 }
 
 const AnswersAPI = {
