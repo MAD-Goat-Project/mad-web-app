@@ -67,7 +67,7 @@ function AssessmentPage() {
     );
   }
 
-  return <TabsComponent assessments={assessments ?? []} />;
+  return <TabsComponent assessments={assessments ?? []} refetch={refetch} />;
 }
 
 export default function Assessment() {

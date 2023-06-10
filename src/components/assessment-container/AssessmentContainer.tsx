@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid';
-import { Alert, Box, Chip, Paper, Snackbar, TextField } from '@mui/material';
+import { Alert, Box, Chip, Paper, Snackbar } from '@mui/material';
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 import Typography from '@mui/material/Typography';
 import ConstructionIcon from '@mui/icons-material/Construction';
@@ -12,6 +12,7 @@ import {
 } from '../../models/assessment.interface';
 import { validateAnswer } from '../../utils/answers.utils';
 import DescriptionIcon from '@mui/icons-material/Description';
+import { Submissions } from './Submissions';
 
 interface ISnackbarProps {
   open: boolean;
@@ -22,10 +23,12 @@ interface ISnackbarProps {
 }
 export function AssessmentContainer({
   assessment,
+  markAssessment,
 }: {
   assessment: IAssessment;
+  markAssessment: () => void;
 }) {
-  const [answer, setAnswer] = useState('');
+  const [answer, setAnswer] = useState<string[]>([]);
   const [snackbarProps, setShowSnackbar] = useState<ISnackbarProps>({
     open: false,
     vertical: 'bottom',
@@ -38,6 +41,7 @@ export function AssessmentContainer({
     // TODO: Use React Query
     validateAnswer(assessment.id, answer).then((response) => {
       if (response) {
+        markAssessment();
         return setShowSnackbar({
           ...snackbarProps,
           open: true,
@@ -68,7 +72,13 @@ export function AssessmentContainer({
       >
         <Alert severity={snackbarProps.severity}>{snackbarProps.message}</Alert>
       </Snackbar>
-      <Grid item container xs={12} alignContent="flex-start">
+      <Grid
+        item
+        container
+        xs={12}
+        style={{ marginBottom: '10px' }}
+        alignContent="flex-start"
+      >
         <Chip icon={<DescriptionIcon />} label="Description" />
       </Grid>
 
@@ -96,7 +106,13 @@ export function AssessmentContainer({
       {assessment.type !== IAssessmentType.INTRODUCTION &&
         assessment.type !== IAssessmentType.CONCLUSION && (
           <Fragment>
-            <Grid item container xs={12} alignContent="flex-start">
+            <Grid
+              item
+              container
+              xs={12}
+              alignContent="flex-start"
+              style={{ marginBottom: '10px' }}
+            >
               <Chip icon={<CrisisAlertIcon />} label="Goal" />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '20px' }}>
@@ -108,7 +124,13 @@ export function AssessmentContainer({
                 </Box>
               </Paper>
             </Grid>
-            <Grid item container xs={12} alignContent="flex-start">
+            <Grid
+              item
+              container
+              xs={12}
+              alignContent="flex-start"
+              style={{ marginBottom: '10px' }}
+            >
               <Chip icon={<ConstructionIcon />} label="Try it out" />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '20px' }}>
@@ -120,13 +142,10 @@ export function AssessmentContainer({
                     alignItems: 'flex-start',
                   }}
                 >
-                  <TextField
-                    label="Submit your answer"
-                    sx={{ mb: 2, width: '300px' }}
-                    value={answer}
-                    onChange={(e) => {
-                      setAnswer(e.target.value);
-                    }}
+                  <Submissions
+                    assessment={assessment}
+                    answer={answer}
+                    setAnswer={setAnswer}
                   />
                   <Button variant="contained" onClick={validateAnswerHandler}>
                     Submit

@@ -1,5 +1,5 @@
 export interface IAnswer {
-  answer: string;
+  answers: string[];
 }
 
 export interface IAnswerResponse {

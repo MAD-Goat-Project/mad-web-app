@@ -5,7 +5,9 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { CardMedia, Chip } from '@mui/material';
 import { Link } from 'react-router-dom';
-import UserLessonProgressApi from '../../api/lessons-api/user-lesson-progress.api';
+import UserLessonProgressApi, {
+  LessonStatus,
+} from '../../api/lessons-api/user-lesson-progress.api';
 import keycloak from '../../configurations/keycloak';
 
 export default function LessonCard({
@@ -21,8 +23,13 @@ export default function LessonCard({
   category: string;
   progress: number;
 }) {
+  //TODO: On api requests we must treat the then and catch
   function markLesson() {
-    UserLessonProgressApi.post(keycloak.idTokenParsed?.sub ?? '', lessonId, 1);
+    UserLessonProgressApi.post(
+      keycloak.idTokenParsed?.sub ?? '',
+      lessonId,
+      LessonStatus.IN_PROGRESS
+    );
   }
 
   return (

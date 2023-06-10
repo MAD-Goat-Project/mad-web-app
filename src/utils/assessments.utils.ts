@@ -1,4 +1,4 @@
-import { IAssessmentType } from '../models/assessment.interface';
+import { IAssessment, IAssessmentType } from '../models/assessment.interface';
 
 export function transformAssessmentType(type: IAssessmentType) {
   switch (type) {
@@ -9,4 +9,14 @@ export function transformAssessmentType(type: IAssessmentType) {
     default:
       return 'Assessment';
   }
+}
+
+/**
+ * Check if all assessments, except asssessments of the type conclusion, are completed.
+ * @param assessments
+ */
+export function allAssessmentsCompleted(assessments: IAssessment[]) {
+  return assessments
+    .filter((assessment) => assessment.type !== IAssessmentType.CONCLUSION)
+    .every((assessment) => assessment.status === 2);
 }

@@ -8,7 +8,7 @@ async function validate(
   answerBody: IAnswer
 ): Promise<IAnswerResponse> {
   return lessonsApi()
-    .post(`/assessments/${assessmentId}/answers/validate`, answerBody)
+    .post(`/assessments/${assessmentId}/answers/validation`, answerBody)
     .then((res) => res.data);
 }
 

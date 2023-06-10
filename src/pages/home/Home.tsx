@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect } from 'react';
 import { Box } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -9,18 +10,33 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import MadGoatHorizontal from '../../assets/mad-horizontal.svg';
 import { madObjectives } from './mad-objectives';
+import goat4shellAPI from '../../api/goat4shell-api/goat4shell.api';
 
 function HomePage() {
   const madImageSize = { width: '65%', height: 'auto', marginBottom: '1em' };
+  const [alt, setAlt] = React.useState('');
+
+  useEffect(() => {
+    const fetchAlt = async () => {
+      goat4shellAPI.get().then(
+        (response) => {
+          setAlt(response.data.description);
+        },
+        (error) => {
+          console.log(error);
+          setAlt('Error retrieving alt text');
+        }
+      );
+    };
+
+    // TODO: Is this the best way to do this?
+    void fetchAlt();
+  }, []);
 
   return (
     <React.Fragment>
       <Container disableGutters component="main" sx={{ pt: 5, pb: 6 }}>
-        <img
-          src={MadGoatHorizontal}
-          style={madImageSize}
-          alt="MAD Goat project logo"
-        />
+        <img src={MadGoatHorizontal} style={madImageSize} alt={alt} />
         <Typography
           variant="h5"
           align="center"

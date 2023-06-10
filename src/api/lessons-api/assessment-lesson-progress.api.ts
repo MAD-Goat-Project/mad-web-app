@@ -21,6 +21,18 @@ async function get(
   );
 }
 
+async function patch(
+  userId: string,
+  lessonId: number,
+  status: AssessmentStatus
+): Promise<AxiosResponse<IUserAssessmentProgress>> {
+  return lessonsApi().patch('/assessment-progress', {
+    user_id: userId,
+    lesson_id: lessonId,
+    status,
+  });
+}
+
 async function post(
   userId: string,
   assessmentId: number,

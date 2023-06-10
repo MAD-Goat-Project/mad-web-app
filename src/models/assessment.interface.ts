@@ -1,3 +1,5 @@
+import { ILesson } from './lesson.interface';
+
 export enum IAssessmentType {
   INTRODUCTION = 1,
   QUESTION_ANSWER = 2,
@@ -9,5 +11,6 @@ export interface IAssessment {
   type: IAssessmentType;
   description: string;
   goal: string;
-  status?: number;
+  quiz?: string[];
+  lesson_id: ILesson;
 }

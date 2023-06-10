@@ -1,14 +1,25 @@
 import { Box, Tab, Tabs } from '@mui/material';
 import * as React from 'react';
-import { useState } from 'react';
-import { IAssessment } from '../../models/assessment.interface';
-import { transformAssessmentType } from '../../utils/assessments.utils';
+import { useEffect, useState } from 'react';
+import {
+  IAssessment,
+  IAssessmentType,
+} from '../../models/assessment.interface';
+import {
+  allAssessmentsCompleted,
+  transformAssessmentType,
+} from '../../utils/assessments.utils';
 import { TabPanel } from './TabsPanel';
 import Grid from '@mui/material/Grid';
 import { AssessmentContainer } from '../assessment-container/AssessmentContainer';
-import Button from '@mui/material/Button';
 import keycloak from '../../configurations/keycloak';
 import UserAssessmentAPI from '../../api/lessons-api/assessment-lesson-progress.api';
+import { useLocation, useNavigate } from 'react-router-dom';
+import UserProgressAPI from '../../api/lessons-api/user-lesson-progress.api';
+import UserLessonProgressApi, {
+  LessonStatus,
+} from '../../api/lessons-api/user-lesson-progress.api';
+import Button from '@mui/material/Button';
 
 function a11yProps(index: number) {
   return {
@@ -16,34 +27,87 @@ function a11yProps(index: number) {
     'aria-controls': `tab-${index}`,
   };
 }
-export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
+export function TabsComponent({
+  assessments,
+  refetch,
+}: {
+  assessments: IAssessment[];
+  refetch: () => void;
+}) {
   const [value, setValue] = useState(0);
+  const [minHeight, setMinHeight] = useState(0);
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   function markAssessment() {
-    console.log('Marking assessment');
-    console.log(assessments);
     const assessmentId: number = assessments[value].id;
     const token: string = keycloak.idTokenParsed?.sub ?? '';
-    return UserAssessmentAPI.post(token, assessmentId, 2);
+    return UserAssessmentAPI.post(token, assessmentId, 2).then(() => {
+      refetch();
+    });
   }
 
+  async function markLesson() {
+    const assessmentId: number = assessments[value].id;
+    const lessonId: number = assessments[value].lesson_id.id;
+    const token: string = keycloak.idTokenParsed?.sub ?? '';
+    const assessmentProgressId = await UserProgressAPI.get(
+      token,
+      lessonId
+    ).then((response) => {
+      return response.data.id;
+    });
+
+    return UserLessonProgressApi.patch(
+      assessmentProgressId,
+      token,
+      lessonId,
+      LessonStatus.COMPLETED
+    );
+  }
+
+  function validateAssessment() {
+    if (assessments[value].type !== IAssessmentType.CONCLUSION)
+      return markAssessment();
+
+    if (allAssessmentsCompleted(assessments)) {
+      const promiseAssessment = markAssessment();
+      const promiseLesson = markLesson();
+      Promise.all([promiseAssessment, promiseLesson]).then(() => {
+        const extractedPath = location.pathname
+          .split('/')
+          .slice(0, 3)
+          .join('/');
+        navigate(extractedPath);
+      });
+    } else {
+      alert('not all assessments completed');
+    }
+  }
+
+  useEffect(() => {
+    const windowHeight = window.innerHeight;
+    const fixedElementsHeight = 56; // Adjust this value if you have any fixed elements above the TabsComponent
+    const newMinHeight = windowHeight - fixedElementsHeight;
+    setMinHeight(newMinHeight);
+  }, [assessments]);
   const getTabIndicatorColor = (index: number): string => {
     const assessment = assessments[index];
     const status = assessment.status;
-    console.log(status);
     switch (status) {
       case 0:
-        return 'black';
+        return 'primary';
       case 1:
-        return 'blue';
+        return 'primary';
       case 2:
         return 'green';
       default:
-        return 'blue';
+        return 'primary';
     }
   };
 
@@ -72,26 +136,41 @@ export function TabsComponent({ assessments }: { assessments: IAssessment[] }) {
         // TODO: Fix Width and Height
         assessments?.map((assessment, index) => (
           <TabPanel value={value} index={index} key={assessment.id}>
-            <Box sx={{ p: 3, minWidth: '80%', minHeight: '80%' }}>
+            <Box sx={{ p: 3, minWidth: '80%', minHeight: minHeight }}>
               <Grid container spacing={2}>
-                <AssessmentContainer assessment={assessment} />
+                <AssessmentContainer
+                  assessment={assessment}
+                  markAssessment={validateAssessment}
+                />
               </Grid>
+              {(assessments[value].type === IAssessmentType.INTRODUCTION ||
+                assessments[value].type === IAssessmentType.CONCLUSION) && (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                    marginTop: 2,
+                  }}
+                >
+                  {assessments[value].status === 2 ? (
+                    <Button variant="contained" color="primary" disabled>
+                      Completed
+                    </Button>
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={validateAssessment}
+                    >
+                      Complete
+                    </Button>
+                  )}
+                </Box>
+              )}
             </Box>
           </TabPanel>
         ))
       }
-
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', marginTop: 2 }}>
-        {assessments[value].status === 2 ? (
-          <Button variant="contained" color="success" disabled>
-            Completed
-          </Button>
-        ) : (
-          <Button variant="contained" color="success" onClick={markAssessment}>
-            Complete
-          </Button>
-        )}
-      </Box>
     </Box>
   );
 }
