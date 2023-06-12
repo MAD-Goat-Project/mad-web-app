@@ -38,6 +38,10 @@ export function AppDrawer({
 
   const [open, setOpen] = React.useState(false);
 
+  /**
+   * Handle click outside the drawer
+   *
+   */
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const drawer = document.getElementById('app-drawer');

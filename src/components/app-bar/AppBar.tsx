@@ -36,7 +36,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-export default function PersistentDrawerLeft() {
+export default function AppBarPersisted() {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {

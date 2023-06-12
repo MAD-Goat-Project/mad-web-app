@@ -8,7 +8,12 @@ export async function validateAnswer(
   const answerBody: IAnswer = {
     answers,
   };
-  return answersApi.validate(assessmentId, answerBody).then((res) => {
-    return res.data.isCorrect;
-  });
+  return answersApi
+    .validate(assessmentId, answerBody)
+    .then((res) => {
+      return res.data.isCorrect;
+    })
+    .catch(() => {
+      return false;
+    });
 }

@@ -2,7 +2,16 @@ import HomeIcon from '@mui/icons-material/Home';
 import SchoolIcon from '@mui/icons-material/School';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { IDrawerOptions } from './IDrawerOptions';
+import { OverridableComponent } from '@mui/material/OverridableComponent';
+import { SvgIconTypeMap } from '@mui/material';
+
+export interface IDrawerOptions {
+  Name: string;
+  Icon: OverridableComponent<SvgIconTypeMap> & { muiName: string };
+  Link?: string;
+  hasChildren?: boolean;
+  Children?: string[];
+}
 
 export const drawerOptions: IDrawerOptions[] = [
   { Name: 'Home', Icon: HomeIcon, Link: '/' },

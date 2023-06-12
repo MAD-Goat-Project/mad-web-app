@@ -3,17 +3,12 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import * as React from 'react';
-import CategoriesAPI from '../../api/lessons-api/categories.api';
-import { useQuery } from 'react-query';
 import { Alert, CircularProgress } from '@mui/material';
 import { Link } from 'react-router-dom';
-import { ICategory } from '../../models/category.interface';
+import { useCategoryList } from '../../hooks/useCategoryList';
 
 export function ListDrawer() {
-  const { data, isLoading, error } = useQuery('categories', async () =>
-    CategoriesAPI.get().then((res) => res.data)
-  );
-  const categoryList: ICategory[] = data;
+  const { categoryList, isLoading, error } = useCategoryList();
 
   if (isLoading) {
     return (

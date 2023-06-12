@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid';
-import { Alert, Box, Chip, Paper, Snackbar } from '@mui/material';
+import { Box, Chip, Paper } from '@mui/material';
 import CrisisAlertIcon from '@mui/icons-material/CrisisAlert';
 import Typography from '@mui/material/Typography';
 import ConstructionIcon from '@mui/icons-material/Construction';
@@ -13,14 +13,9 @@ import {
 import { validateAnswer } from '../../utils/answers.utils';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { Submissions } from './Submissions';
+import SnackBarAlert, { ISnackbarProps } from '../snackbar/Snackbar';
+import PropTypes from 'prop-types';
 
-interface ISnackbarProps {
-  open: boolean;
-  vertical: 'top' | 'bottom';
-  horizontal: 'left' | 'center' | 'right';
-  message: string;
-  severity: 'success' | 'info' | 'warning' | 'error';
-}
 export function AssessmentContainer({
   assessment,
   markAssessment,
@@ -31,14 +26,11 @@ export function AssessmentContainer({
   const [answer, setAnswer] = useState<string[]>([]);
   const [snackbarProps, setShowSnackbar] = useState<ISnackbarProps>({
     open: false,
-    vertical: 'bottom',
-    horizontal: 'right',
     message: '',
     severity: 'error',
   });
 
   function validateAnswerHandler() {
-    // TODO: Use React Query
     validateAnswer(assessment.id, answer).then((response) => {
       if (response) {
         markAssessment();
@@ -60,18 +52,13 @@ export function AssessmentContainer({
 
   return (
     <div>
-      <Snackbar
-        anchorOrigin={{
-          vertical: snackbarProps.vertical,
-          horizontal: snackbarProps.horizontal,
-        }}
-        open={snackbarProps.open}
+      <SnackBarAlert
+        severity={snackbarProps.severity}
         onClose={() => setShowSnackbar({ ...snackbarProps, open: false })}
-        autoHideDuration={4000}
-        key={'bottom-right'}
-      >
-        <Alert severity={snackbarProps.severity}>{snackbarProps.message}</Alert>
-      </Snackbar>
+        message={snackbarProps.message}
+        open={snackbarProps.open}
+      />
+
       <Grid
         item
         container
@@ -158,3 +145,8 @@ export function AssessmentContainer({
     </div>
   );
 }
+
+AssessmentContainer.propTypes = {
+  assessment: PropTypes.object.isRequired,
+  markAssessment: PropTypes.func.isRequired,
+};
