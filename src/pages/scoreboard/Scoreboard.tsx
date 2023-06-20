@@ -6,6 +6,7 @@ import keycloak from '../../configurations/keycloak';
 import { Alert, CircularProgress } from '@mui/material';
 import BasicModal from '../../components/modal/BasicModal';
 import { AxiosError } from 'axios';
+import EnhancedTable from '../../components/table/EnhancedTable';
 
 function ScoreboardPage() {
   const [gamerTag, setGamerTag] = React.useState('');
@@ -53,8 +54,7 @@ function ScoreboardPage() {
     <div>
       {userExists ? (
         <div>
-          <h1>Scoreboard</h1>
-          <h2>Welcome {gamerTag}!</h2>
+          <EnhancedTable />
         </div>
       ) : (
         <>

@@ -2,6 +2,9 @@ import { scoreboardApi } from '../configs/axiosConfig';
 import { AxiosResponse } from 'axios';
 import { IScoreboardClient } from '../../models/scoreboard.interface';
 
+async function get(): Promise<AxiosResponse<IScoreboardClient[]>> {
+  return scoreboardApi().get(`/users`);
+}
 async function getClient(
   clientId: string
 ): Promise<AxiosResponse<IScoreboardClient>> {
@@ -27,6 +30,7 @@ async function createNewUser(
 }
 
 const UsersAPI = {
+  get,
   getClient,
   getRandomName,
   createNewUser,
