@@ -59,7 +59,7 @@ function stableSort<T>(
 
 function TableComponent({ userList }: { userList: Data[] }) {
   const [order, setOrder] = React.useState<Order>('asc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('points');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('totalPoints');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -178,7 +178,7 @@ function TableComponent({ userList }: { userList: Data[] }) {
                     >
                       {row.name}
                     </TableCell>
-                    <TableCell align="right">{row.points}</TableCell>
+                    <TableCell align="right">{row.totalPoints}</TableCell>
                   </TableRow>
                 );
               })}

@@ -25,7 +25,7 @@ async function createNewUser(
   return (
     scoreboardApi()
       // TODO: Possible to change the number of points here??
-      .post<IScoreboardClient>(`/users`, { clientId, name, points: 0 })
+      .post<IScoreboardClient>(`/users`, { clientId, name, totalPoints: 0 })
   );
 }
 

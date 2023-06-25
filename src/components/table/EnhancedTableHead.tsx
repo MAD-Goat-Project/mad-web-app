@@ -11,7 +11,7 @@ type Order = 'asc' | 'desc';
 
 export interface Data {
   name: string;
-  points: number;
+  totalPoints: number;
 }
 interface HeadCell<T> {
   disablePadding: boolean;
@@ -48,7 +48,7 @@ export function EnhancedTableHead(props: EnhancedTableProps) {
       label: 'Name',
     },
     {
-      id: 'points',
+      id: 'totalPoints',
       numeric: true,
       disablePadding: false,
       label: 'Points',
