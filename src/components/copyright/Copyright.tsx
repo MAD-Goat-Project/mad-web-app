@@ -2,6 +2,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import * as React from 'react';
 
+// TODO: Remove the link to MUI
 export function Copyright() {
   return (
     <Typography

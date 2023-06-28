@@ -31,6 +31,24 @@ export default function LessonCard({
     );
   }
 
+  function getStatusLabel(): {
+    label: string;
+    color: 'default' | 'info' | 'success';
+  } {
+    switch (progress) {
+      case 0:
+        return { label: 'Not Started', color: 'default' };
+      case 1:
+        return { label: 'In Progress', color: 'info' };
+      case 2:
+        return { label: 'Completed', color: 'success' };
+      default:
+        return { label: 'Not Started', color: 'default' };
+    }
+  }
+
+  const { label, color } = getStatusLabel();
+
   return (
     <Card sx={{ maxWidth: '1200px' }} key={lessonId}>
       <CardContent>
@@ -70,15 +88,7 @@ export default function LessonCard({
             Take the lesson
           </Button>{' '}
         </Link>
-        {progress === 0 ? (
-          <Chip label="Not Started" color="default" />
-        ) : progress === 1 ? (
-          <Chip label="In Progress" color="info" />
-        ) : progress === 2 ? (
-          <Chip label="Completed" color="success" />
-        ) : (
-          <Chip label="Not Started" color="default" />
-        )}
+        <Chip label={label} color={color} />
       </CardActions>
     </Card>
   );
