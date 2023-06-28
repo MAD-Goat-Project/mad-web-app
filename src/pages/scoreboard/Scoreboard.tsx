@@ -8,6 +8,8 @@ import BasicModal from '../../components/modal/BasicModal';
 import { AxiosError } from 'axios';
 import EnhancedTable from '../../components/table/EnhancedTable';
 
+// TODO: Change API so that it returns a 200 if the user does not exist but specifies that the user does not exist
+
 function ScoreboardPage() {
   const [gamerTag, setGamerTag] = React.useState('');
 

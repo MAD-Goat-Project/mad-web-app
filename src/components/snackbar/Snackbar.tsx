@@ -1,6 +1,5 @@
 import { Alert, Snackbar } from '@mui/material';
 import * as React from 'react';
-import PropTypes from 'prop-types';
 
 /**
  * Snackbar Props
@@ -62,13 +61,4 @@ export default function SnackBarAlert({
 SnackBarAlert.defaultProps = {
   vertical: 'bottom',
   horizontal: 'right',
-};
-
-SnackBarAlert.propTypes = {
-  open: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired,
-  severity: PropTypes.oneOf(['success', 'info', 'warning', 'error']).isRequired,
-  vertical: PropTypes.oneOf(['top', 'bottom']),
-  horizontal: PropTypes.oneOf(['left', 'center', 'right']),
 };

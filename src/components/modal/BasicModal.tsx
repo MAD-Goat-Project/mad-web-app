@@ -6,7 +6,6 @@ import Modal from '@mui/material/Modal';
 import { FormControl, TextField, Tooltip } from '@mui/material';
 import usersAPI from '../../api/scoreboard-api/users.api';
 import InfoIcon from '@mui/icons-material/Info';
-import PropTypes from 'prop-types';
 import keycloak from '../../configurations/keycloak';
 
 const style = {
@@ -46,19 +45,25 @@ export default function BasicModal({
   function createNewUser() {
     keycloak.loadUserProfile().then((userInfo) => {
       if (userInfo.id) {
-        usersAPI.createNewUser(userInfo.id, gamerTag).then((response) => {
-          if (response.status === 201) {
-            setOpen(false);
-          } else {
+        usersAPI
+          .createNewUser(userInfo.id, gamerTag)
+          .then((response) => {
+            if (response.status === 201) setOpen(false);
+          })
+          .catch(() => {
+            // TODO: Add error handling component
             alert('Something went wrong, please try again later.');
-          }
-        });
+          });
       }
     });
   }
 
   function closeModal() {
     setOpen(false);
+  }
+
+  function handleGameTagChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setGamerTag(event.target.value);
   }
 
   return (
@@ -83,7 +88,7 @@ export default function BasicModal({
               component="h2"
               style={{ marginLeft: '10px' }}
             >
-              Gamer tag
+              Gamer Tag
             </Typography>
             <Tooltip
               title={
@@ -103,7 +108,7 @@ export default function BasicModal({
                 label="Choose your gamer tag"
                 variant="outlined"
                 value={gamerTag}
-                onChange={(event) => setGamerTag(event.target.value)}
+                onChange={handleGameTagChange}
               />
             </FormControl>
           </Typography>
@@ -131,8 +136,3 @@ export default function BasicModal({
     </div>
   );
 }
-
-BasicModal.propTypes = {
-  buttonText: PropTypes.string.isRequired,
-  openModal: PropTypes.bool.isRequired,
-};
