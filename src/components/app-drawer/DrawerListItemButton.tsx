@@ -4,7 +4,6 @@ import ListItemText from '@mui/material/ListItemText';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import * as React from 'react';
 import { IDrawerOptions } from './drawerOptions';
-import PropTypes from 'prop-types';
 
 export function DrawerListItemButton({
   handleClick,
@@ -28,9 +27,3 @@ export function DrawerListItemButton({
     </ListItemButton>
   );
 }
-
-DrawerListItemButton.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  option: PropTypes.object.isRequired,
-  open: PropTypes.bool.isRequired,
-};

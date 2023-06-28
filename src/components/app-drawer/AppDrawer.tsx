@@ -9,7 +9,6 @@ import { useEffect } from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import { Collapse } from '@mui/material';
 import { drawerOptions } from './drawerOptions';
-import PropTypes from 'prop-types';
 import { ListDrawer } from './DrawerChildrenItens';
 import { Link } from 'react-router-dom';
 import { DrawerListItemButton } from './DrawerListItemButton';
@@ -128,8 +127,3 @@ export function AppDrawer({
     </Drawer>
   );
 }
-
-AppDrawer.propTypes = {
-  openDrawer: PropTypes.bool.isRequired,
-  setOpenState: PropTypes.func.isRequired,
-};

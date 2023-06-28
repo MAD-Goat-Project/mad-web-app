@@ -14,7 +14,6 @@ import { validateAnswer } from '../../utils/answers.utils';
 import DescriptionIcon from '@mui/icons-material/Description';
 import { Submissions } from './Submissions';
 import SnackBarAlert, { ISnackbarProps } from '../snackbar/Snackbar';
-import PropTypes from 'prop-types';
 
 export function AssessmentContainer({
   assessment,
@@ -68,7 +67,6 @@ export function AssessmentContainer({
       >
         <Chip icon={<DescriptionIcon />} label="Description" />
       </Grid>
-
       <Grid item xs={12} style={{ marginBottom: '20px' }}>
         <Paper
           sx={{
@@ -145,8 +143,3 @@ export function AssessmentContainer({
     </div>
   );
 }
-
-AssessmentContainer.propTypes = {
-  assessment: PropTypes.object.isRequired,
-  markAssessment: PropTypes.func.isRequired,
-};

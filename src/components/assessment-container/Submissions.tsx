@@ -8,7 +8,6 @@ import {
   FormGroup,
   TextField,
 } from '@mui/material';
-import * as React from 'react';
 
 export function Submissions({
   assessment,
@@ -19,6 +18,14 @@ export function Submissions({
   answer: string[];
   setAnswer: (answer: string[]) => void;
 }) {
+  const handleCheckboxChange = (question: string) => {
+    if (answer.includes(question)) {
+      setAnswer(answer.filter((ans) => ans !== question));
+    } else {
+      setAnswer([...answer, question]);
+    }
+  };
+
   if (assessment.type === IAssessmentType.QUESTION_ANSWER)
     return (
       <TextField
@@ -34,21 +41,14 @@ export function Submissions({
   if (assessment.type === IAssessmentType.QUIZ && assessment.quiz) {
     return (
       <FormGroup>
-        {assessment.quiz?.map((question, index) => {
+        {assessment.quiz.map((question, index) => {
           return (
             <FormControlLabel
               key={index}
               control={<Checkbox />}
               label={question}
               checked={answer.includes(question)}
-              onChange={() => {
-                if (answer.includes(question)) {
-                  setAnswer(answer.filter((ans) => ans !== question));
-                } else {
-                  setAnswer([...answer, question]);
-                }
-                console.log(answer);
-              }}
+              onChange={() => handleCheckboxChange(question)}
             />
           );
         })}
@@ -56,5 +56,5 @@ export function Submissions({
     );
   }
 
-  return <div></div>;
+  return null;
 }
