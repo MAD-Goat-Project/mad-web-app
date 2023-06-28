@@ -51,19 +51,6 @@ export function Avatar() {
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
-        <MenuItem
-          onClick={() => {
-            console.log(keycloak.token);
-            keycloak.loadUserInfo().then((userInfo) => {
-              console.log(userInfo);
-            });
-            navigator.clipboard
-              .writeText(keycloak.token ? keycloak.token : '')
-              .then(() => console.log('Token copied to clipboard.'));
-          }}
-        >
-          Test
-        </MenuItem>
       </Menu>
     </div>
   );
