@@ -17,7 +17,6 @@ import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
 const drawerWidth = 240;
 
-// TODO: Refactor this component
 export function AppDrawer({
   openDrawer,
   setOpenState,
@@ -64,7 +63,6 @@ export function AppDrawer({
     setOpenState(false);
   };
 
-  // TODO: Move the content when the app-drawer is open
   return (
     <Drawer
       sx={{
