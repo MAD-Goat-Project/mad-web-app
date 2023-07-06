@@ -45,8 +45,7 @@ export function TabsComponent({
 
   function markAssessment() {
     const assessmentId: number = assessments[value].id;
-    const token: string = keycloak.idTokenParsed?.sub ?? '';
-    return UserAssessmentAPI.post(token, assessmentId, 2).then(() => {
+    return UserAssessmentAPI.post(assessmentId, 2).then(() => {
       refetch();
     });
   }

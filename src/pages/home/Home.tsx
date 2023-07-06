@@ -14,17 +14,17 @@ import goat4shellAPI from '../../api/goat4shell-api/goat4shell.api';
 
 function HomePage() {
   const madImageSize = { width: '65%', height: 'auto', marginBottom: '1em' };
-  const [alt, setAlt] = React.useState('');
+  const [hiddenMessage, setHiddenMessage] = React.useState('');
 
   useEffect(() => {
     const fetchAlt = async () => {
       goat4shellAPI.get().then(
         (response) => {
-          setAlt(response.data.description);
+          setHiddenMessage(response.data.description);
         },
         (error) => {
           console.log(error);
-          setAlt('Error retrieving alt text');
+          setHiddenMessage('Error retrieving alt text');
         }
       );
     };
@@ -36,7 +36,12 @@ function HomePage() {
   return (
     <React.Fragment>
       <Container disableGutters component="main" sx={{ pt: 5, pb: 6 }}>
-        <img src={MadGoatHorizontal} style={madImageSize} alt={alt} />
+        <img
+          src={MadGoatHorizontal}
+          style={madImageSize}
+          alt="MAD Goat Logo"
+          data-hidden-info={hiddenMessage}
+        />
         <Typography
           variant="h5"
           align="center"

@@ -17,24 +17,20 @@ async function get(
 }
 
 async function patch(
-  userId: string,
   lessonId: number,
   status: AssessmentStatus
 ): Promise<AxiosResponse<IUserAssessmentProgress>> {
   return lessonsApi().patch(USER_PROGRESS_BASE_ENDPOINT, {
-    user_id: userId,
     lesson_id: lessonId,
     status,
   });
 }
 
 async function post(
-  userId: string,
   assessmentId: number,
   status: AssessmentStatus
 ): Promise<AxiosResponse<IUserAssessmentProgress>> {
   return lessonsApi().post(USER_PROGRESS_BASE_ENDPOINT, {
-    user_id: userId,
     assessment_id: assessmentId,
     status,
   });

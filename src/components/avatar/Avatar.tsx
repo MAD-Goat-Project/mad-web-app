@@ -7,6 +7,8 @@ import Divider from '@mui/material/Divider';
 import keycloak from '../../configurations/keycloak';
 
 export function Avatar() {
+  const isDevelopmentMode = import.meta.env.MODE === 'development';
+
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -51,6 +53,24 @@ export function Avatar() {
         <MenuItem onClick={handleClose}>Profile</MenuItem>
         <Divider />
         <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
+        {isDevelopmentMode && (
+          <>
+            <Divider />
+            <MenuItem
+              onClick={() => {
+                console.log(keycloak.token);
+                keycloak.loadUserInfo().then((userInfo) => {
+                  console.log(userInfo);
+                });
+                navigator.clipboard
+                  .writeText(keycloak.token ? keycloak.token : '')
+                  .then(() => console.log('Token copied to clipboard.'));
+              }}
+            >
+              Token
+            </MenuItem>
+          </>
+        )}
       </Menu>
     </div>
   );
