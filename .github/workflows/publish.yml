@@ -27,13 +27,13 @@ jobs:
 
       - name: Create env variables if needed
         run: |
-            echo "${{ vars.ENV_FILE_WEB_DOCKER }}" > env_file
-            echo "${{ vars.ENV_FILE_WEB_DOCKER }}" > .env.local          
+          echo "${{ vars.ENV_FILE_WEB_DOCKER }}" > env_file
+          echo "${{ vars.ENV_FILE_WEB_DOCKER }}" > .env.local          
           set -o allexport
-            source env_file
-            set +o allexport
-            rm env_file
-            echo "Env variables created" 
+          source env_file
+          set +o allexport
+          rm env_file
+          echo "Env variables created" 
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
