@@ -17,20 +17,20 @@ function HomePage() {
   const [hiddenMessage, setHiddenMessage] = React.useState('');
 
   useEffect(() => {
-    const fetchAlt = async () => {
+    const fetchHiddenMessage = async () => {
       goat4shellAPI.get().then(
         (response) => {
           setHiddenMessage(response.data.description);
         },
         (error) => {
           console.log(error);
-          setHiddenMessage('Error retrieving alt text');
+          setHiddenMessage('Error retrieving hidden text');
         }
       );
     };
 
     // TODO: Is this the best way to do this?
-    void fetchAlt();
+    void fetchHiddenMessage();
   }, []);
 
   return (
