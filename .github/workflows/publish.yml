@@ -9,4 +9,4 @@ jobs:
   build-and-push-image:
       uses: MAD-Goat-Project/github-actions-workflows/.github/workflows/publish-docker.yml@main
       secrets:
-        ENV_FILE: ${{ secrets.ENV_FILE }}
+        ENV_FILE: ${{ vars.ENV_FILE_WEB_DOCKER }}
