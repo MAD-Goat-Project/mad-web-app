@@ -5,6 +5,9 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material';
 
+import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
+
+const DOCS_URL = import.meta.env.VITE_DOCS_BASE_URL as string;
 export interface IDrawerOptions {
   Name: string;
   Icon: OverridableComponent<SvgIconTypeMap> & { muiName: string };
@@ -30,4 +33,5 @@ export const drawerOptions: IDrawerOptions[] = [
   },
   { Name: 'Scoreboard', Icon: EmojiEventsIcon, Link: '/scoreboard' },
   { Name: 'Settings', Icon: SettingsIcon, Link: '/' },
+  { Name: 'Docs', Icon: LibraryBooksIcon, Link: DOCS_URL },
 ];
