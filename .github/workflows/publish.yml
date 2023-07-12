@@ -27,15 +27,13 @@ jobs:
 
       - name: Create env variables if needed
         run: |
-          if [[ -z "${{ vars.ENV_FILE_WEB_DOCKER }}" ]]; then
-            echo "env_file secret not found"
-          else
             echo "${{ vars.ENV_FILE_WEB_DOCKER }}" > env_file
-            set -o allexport
+            echo "${{ vars.ENV_FILE_WEB_DOCKER }}" > .env.local          
+          set -o allexport
             source env_file
             set +o allexport
             rm env_file
-          fi
+            echo "Env variables created" 
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
