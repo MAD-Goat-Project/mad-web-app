@@ -11,9 +11,9 @@ import {
   IAssessmentType,
 } from '../../models/assessment.interface';
 import { validateAnswer } from '../../utils/answers.utils';
-import DescriptionIcon from '@mui/icons-material/Description';
 import { Submissions } from './Submissions';
 import SnackBarAlert, { ISnackbarProps } from '../snackbar/Snackbar';
+import ParsedHTML from '../../utils/ParsedHTML';
 
 export function AssessmentContainer({
   assessment,
@@ -65,7 +65,7 @@ export function AssessmentContainer({
         style={{ marginBottom: '10px' }}
         alignContent="flex-start"
       >
-        <Chip icon={<DescriptionIcon />} label="Description" />
+        {/*<Chip icon={<DescriptionIcon />} label="Description" />*/}
       </Grid>
       <Grid item xs={12} style={{ marginBottom: '20px' }}>
         <Paper
@@ -78,12 +78,7 @@ export function AssessmentContainer({
           }}
         >
           <Typography variant="body1" textAlign="justify" component="div">
-            {assessment.description.split('\n').map((line, key) => (
-              <React.Fragment key={key}>
-                {line}
-                <br />
-              </React.Fragment>
-            ))}
+            {ParsedHTML(assessment.description)}
           </Typography>
         </Paper>
       </Grid>
