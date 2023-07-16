@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
-
 [![Test][gha-test-badge]][gha-test-url] [![Publish Docker image][gha-build-badge]][gha-build-url]
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -40,12 +40,7 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
@@ -53,13 +48,17 @@
 
 ## About The Project
 
+Web Application for the MAD Goat Project.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+[![React][react.js]][react-url]
 
-- [![React][react.js]][react-url]
+![Vite]
+
+![TypeScript]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -69,72 +68,27 @@ This section should list any major frameworks/libraries used to bootstrap your p
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-
-- npm
+- yarn
   ```sh
-  npm install npm@latest -g
+  npm install --global yarn
   ```
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+1. Clone the repo
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+2. Install NPM packages
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   yarn install
    ```
-3. Install NPM packages
+3. Duplicate the .env.sample file and rename it to .env.local
    ```sh
-   npm install
+   cp .env.sample .env.local
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
+4. Start the development server
+   ```sh
+    yarn dev
    ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- USAGE EXAMPLES -->
-
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-- [x] Add Changelog
-- [x] Add back to top links
-- [ ] Add Additional Templates w/ Examples
-- [ ] Add "components" document to easily copy & paste sections of the readme
-- [ ] Multi-language Support
-  - [ ] Chinese
-  - [ ] Spanish
-
-See the [open issues](https://github.com/MAD-Goat-Project/mad-web-app/issues) for a full list of proposed features (and known issues).
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement". Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -143,22 +97,6 @@ If you have a suggestion that would make this better, please fork the repo and c
 ## License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTACT -->
-
-## Contact
-
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
-
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -192,10 +130,34 @@ Project Link: [https://github.com/your_username/repo_name](https://github.com/yo
 [bootstrap-url]: https://getbootstrap.com
 [jquery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [jquery-url]: https://jquery.com
-
-
 [gha-test-badge]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/test.yml/badge.svg
 [gha-test-url]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/test.yml
-
 [gha-build-badge]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/publish.yml/badge.svg
 [gha-build-url]: https://github.com/MAD-Goat-Project/mad-web-app/actions/workflows/publish.yml
+[contributors-shield]: https://img.shields.io/github/contributors/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
+[contributors-url]: https://github.com/MAD-Goat-Project/mad-web-app/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
+[forks-url]: https://github.com/MAD-Goat-Project/mad-web-app/network/members
+[stars-shield]: https://img.shields.io/github/stars/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
+[stars-url]: https://github.com/MAD-Goat-Project/mad-web-app/stargazers
+[issues-shield]: https://img.shields.io/github/issues/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
+[issues-url]: https://github.com/MAD-Goat-Project/mad-web-app/issues
+[license-shield]: https://img.shields.io/github/license/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
+[license-url]: https://github.com/MAD-Goat-Project/mad-web-app/blob/main/LICENSE
+[react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[react-url]: https://reactjs.org/
+[min.io]: https://img.shields.io/avatars.githubusercontent.com/u/695951?s=200&v=4
+[minio-url]: https://min.io/
+[NodeJS]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
+[Typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[Java]: https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white
+[Spring]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
+[MongoDB]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[postgres]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
+[rabbitmq]: https://img.shields.io/badge/rabbitmq-%23FF6600.svg?&style=for-the-badge&logo=rabbitmq&logoColor=white
+[NestJS]: https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white
+[Kubernetes]: https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white
+[Traefik Proxy]: https://img.shields.io/static/v1?style=for-the-badge&message=Traefik+Proxy&color=24A1C1&logo=Traefik+Proxy&logoColor=FFFFFF&label=
+[Docker]: https://img.shields.io/static/v1?style=for-the-badge&message=Docker&color=2496ED&logo=Docker&logoColor=FFFFFF&label=
+[Vite]: https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white
+[Typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
