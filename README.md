@@ -98,7 +98,21 @@ Web Application for the MAD Goat Project.
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
+## Icon Credits
+
+<a href="https://iconscout.com/icons/security-ways" target="_blank">Free Security ways Icon</a> by <a href="https://iconscout.com/contributors/hana-arif">Vectors Point</a> on <a href="https://iconscout.com">IconScout</a>
+
+<a href="https://iconscout.com/icons/unknown-folder" target="_blank">Free Unknown Folder Icon</a> by <a href="https://iconscout.com/contributors/theiconz">The Icon Z</a> on <a href="https://iconscout.com">IconScout</a>
+
+<a href="https://iconscout.com/icons/agreement" target="_blank">Free Agreement Icon</a> by <a href="https://iconscout.com/contributors/iconlib">IconLib</a> on <a href="https://iconscout.com">IconScout</a>
+
+<a href="https://iconscout.com/icons/scan" target="_blank">Free Scan Icon</a> by <a href="https://iconscout.com/contributors/adms-icon" target="_blank">ADMS Icons</a>
+
+<a href="https://iconscout.com/icons/container" target="_blank">Free Container Icon</a> by <a href="https://iconscout.com/contributors/andinur">Andinur Studio</a> on <a href="https://iconscout.com">IconScout</a>
+
+<a href="https://iconscout.com/icons/crane-lifter" target="_blank">Free Crane Lifter Icon</a> by <a href="https://iconscout.com/contributors/promotion-king" target="_blank">Rank Sol</a>
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -139,10 +153,10 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [forks-shield]: https://img.shields.io/github/forks/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
 [forks-url]: https://github.com/MAD-Goat-Project/mad-web-app/network/members
 [stars-shield]: https://img.shields.io/github/stars/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
-[stars-url]: https://github.com/MAD-Goat-Project/mad-web-app/stargazers
+[license-shield]: https://img.shields.io/github/license/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
 [issues-shield]: https://img.shields.io/github/issues/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
 [issues-url]: https://github.com/MAD-Goat-Project/mad-web-app/issues
-[license-shield]: https://img.shields.io/github/license/MAD-Goat-Project/mad-web-app.svg?style=for-the-badge
+[stars-url]: https://github.com/MAD-Goat-Project/mad-web-app/stargazers
 [license-url]: https://github.com/MAD-Goat-Project/mad-web-app/blob/main/LICENSE
 [react.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [react-url]: https://reactjs.org/
@@ -150,12 +164,12 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 [minio-url]: https://min.io/
 [NodeJS]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
 [Typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[postgres]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
 [Java]: https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white
 [Spring]: https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white
 [MongoDB]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
-[postgres]: https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white
-[rabbitmq]: https://img.shields.io/badge/rabbitmq-%23FF6600.svg?&style=for-the-badge&logo=rabbitmq&logoColor=white
 [NestJS]: https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white
+[rabbitmq]: https://img.shields.io/badge/rabbitmq-%23FF6600.svg?&style=for-the-badge&logo=rabbitmq&logoColor=white
 [Kubernetes]: https://img.shields.io/badge/kubernetes-%23326ce5.svg?style=for-the-badge&logo=kubernetes&logoColor=white
 [Traefik Proxy]: https://img.shields.io/static/v1?style=for-the-badge&message=Traefik+Proxy&color=24A1C1&logo=Traefik+Proxy&logoColor=FFFFFF&label=
 [Docker]: https://img.shields.io/static/v1?style=for-the-badge&message=Docker&color=2496ED&logo=Docker&logoColor=FFFFFF&label=

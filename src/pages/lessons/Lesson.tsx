@@ -95,6 +95,8 @@ function LessonPage() {
               lessonId={lesson.id}
               category={category}
               progress={lesson.status ? lesson.status : 0}
+              image={lesson.image_src}
+              image_alt={lesson.image_alt}
             />
           </Grid>
         ))}

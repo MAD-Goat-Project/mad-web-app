@@ -9,18 +9,24 @@ import UserLessonProgressApi from '../../api/lessons-api/user-lesson-progress.ap
 import keycloak from '../../configurations/keycloak';
 import { LessonStatus } from '../../models/user-lesson-progress.interface';
 
+const VITE_OBJECT_STORAGE_BASE_URL = import.meta.env
+  .VITE_OBJECT_STORAGE_BASE_URL;
 export default function LessonCard({
   title,
   description,
   lessonId,
   category,
   progress,
+  image,
+  image_alt,
 }: {
   title: string;
   description: string;
   lessonId: number;
   category: string;
   progress: number;
+  image: string;
+  image_alt: string;
 }) {
   //TODO: On api requests we must treat the then and catch
   function markLesson() {
@@ -62,7 +68,7 @@ export default function LessonCard({
           <CardMedia
             sx={{ height: 50, width: 50 }}
             // TODO: Dynamically load the image
-            image="/mad.svg"
+            image={`${VITE_OBJECT_STORAGE_BASE_URL}/${image}`}
             title="green iguana"
           />
           <Typography
