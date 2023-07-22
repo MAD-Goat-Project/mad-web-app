@@ -89,7 +89,7 @@ export default function LessonCard({
         </Typography>
       </CardContent>
       <CardActions>
-        <Link to={`/${category}/lessons/${lessonId}`}>
+        <Link to={`/lessons/${category}/${lessonId}`}>
           <Button size="small" onClick={markLesson}>
             Take the lesson
           </Button>{' '}
