@@ -1,10 +1,9 @@
 import HomeIcon from '@mui/icons-material/Home';
 import SchoolIcon from '@mui/icons-material/School';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { OverridableComponent } from '@mui/material/OverridableComponent';
 import { SvgIconTypeMap } from '@mui/material';
-
+import PersonIcon from '@mui/icons-material/Person';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 const DOCS_URL = import.meta.env.VITE_DOCS_BASE_URL as string;
@@ -32,6 +31,6 @@ export const drawerOptions: IDrawerOptions[] = [
     ],
   },
   { Name: 'Scoreboard', Icon: EmojiEventsIcon, Link: '/scoreboard' },
-  { Name: 'Settings', Icon: SettingsIcon, Link: '/' },
+  { Name: 'Profile', Icon: PersonIcon, Link: '/profile' },
   { Name: 'Docs', Icon: LibraryBooksIcon, Link: DOCS_URL },
 ];

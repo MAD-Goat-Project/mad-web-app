@@ -109,17 +109,19 @@ export function TabsComponent({
   };
 
   return (
-    <Box sx={{ position: 'sticky', zIndex: 1 }}>
+    <Box sx={{ display: 'flex', minHeight: minHeight }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs
+          orientation="vertical"
+          variant="scrollable"
           value={value}
           onChange={handleChange}
           aria-label="Assessments tabs"
-          variant="fullWidth"
+          sx={{ borderRight: 1, borderColor: 'divider', width: '108%' }}
         >
           {assessments?.map((assessment, index) => (
             <Tab
-              label={transformAssessmentType(assessment.type)}
+              label={transformAssessmentType(assessment.type, index)}
               {...a11yProps(index)}
               key={assessment.id}
               sx={{

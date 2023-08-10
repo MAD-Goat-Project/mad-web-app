@@ -5,6 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import Divider from '@mui/material/Divider';
 import keycloak from '../../configurations/keycloak';
+import { Link } from 'react-router-dom';
 
 export function Avatar() {
   const isDevelopmentMode = import.meta.env.MODE === 'development';
@@ -50,7 +51,9 @@ export function Avatar() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <Link to={'/profile'}>
+          <MenuItem onClick={handleClose}>Profile</MenuItem>
+        </Link>
         <Divider />
         <MenuItem onClick={handleLogout}>Sign Out</MenuItem>
         {isDevelopmentMode && (

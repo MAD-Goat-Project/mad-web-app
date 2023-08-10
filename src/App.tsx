@@ -14,6 +14,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import ButtonAppBar from './components/app-bar/AppBar';
 import Assessment from './pages/assessments/Assessment';
 import Scoreboard from './pages/scoreboard/Scoreboard';
+import Profile from './pages/profile/Profile';
 
 function App() {
   return (
@@ -62,6 +63,14 @@ function App() {
                 element={
                   <PrivateRoute>
                     <Scoreboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <Profile />
                   </PrivateRoute>
                 }
               />

@@ -14,4 +14,9 @@ const goat4shellApi = () => {
   return new APIClient(baseURL).getAxiosInstance();
 };
 
-export { lessonsApi, scoreboardApi, goat4shellApi };
+const profileApi = () => {
+  const baseURL: string = import.meta.env.VITE_PROFILE_BASE_URL as string;
+  return new APIClient(baseURL).getAxiosInstance();
+};
+
+export { lessonsApi, scoreboardApi, goat4shellApi, profileApi };

@@ -43,6 +43,10 @@ export default function BasicModal({
   }
 
   function createNewUser() {
+    if (gamerTag.length === 0) {
+      alert('The gamer tag must have at least 1 character.');
+      return;
+    }
     keycloak.loadUserProfile().then((userInfo) => {
       if (userInfo.id) {
         usersAPI

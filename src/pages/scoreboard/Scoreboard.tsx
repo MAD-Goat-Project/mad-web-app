@@ -20,7 +20,9 @@ function ScoreboardPage() {
     refetch,
   } = useQuery<boolean>('scoreboard', async () =>
     UsersApi.getClient(keycloak.idTokenParsed?.sub ?? '')
-      .then((res) => !!res.data._id)
+      .then((res) => {
+        return res.status === 200 && res.data.name?.length > 0;
+      })
       .catch((err: AxiosError) => {
         if (err.response?.status === 404) {
           return false;

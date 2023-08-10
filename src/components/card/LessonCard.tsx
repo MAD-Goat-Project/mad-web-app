@@ -91,10 +91,12 @@ export default function LessonCard({
       <CardActions>
         <Link to={`/lessons/${category}/${lessonId}`}>
           <Button size="small" onClick={markLesson}>
-            Take the lesson
+            {progress === 2 ? 'Review the lesson' : 'Start the lesson'}
           </Button>{' '}
         </Link>
-        <Chip label={label} color={color} />
+        <div style={{ marginLeft: 'auto' }}>
+          <Chip label={label} color={color} />
+        </div>
       </CardActions>
     </Card>
   );

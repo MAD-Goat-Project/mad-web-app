@@ -111,7 +111,14 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <a href="https://iconscout.com/icons/container" target="_blank">Free Container Icon</a> by <a href="https://iconscout.com/contributors/andinur">Andinur Studio</a> on <a href="https://iconscout.com">IconScout</a>
 
 <a href="https://iconscout.com/icons/crane-lifter" target="_blank">Free Crane Lifter Icon</a> by <a href="https://iconscout.com/contributors/promotion-king" target="_blank">Rank Sol</a>
+
+<a href="https://iconscout.com/icons/broken-protection" target="_blank">Free Broken Protection Icon</a> by <a href="https://iconscout.com/contributors/kerismaker">Kerismaker Studio</a> on <a href="https://iconscout.com">IconScout</a>
+
+<a href="https://iconscout.com/icons/mind-system" target="_blank">Free Mind system Icon</a> by <a href="https://iconscout.com/contributors/turan-kent">Turan Kent</a> on <a href="https://iconscout.com">IconScout</a>
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
 
 
 <!-- MARKDOWN LINKS & IMAGES -->

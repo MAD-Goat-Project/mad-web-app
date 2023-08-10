@@ -24,7 +24,7 @@ async function createNewUser(
 ): Promise<AxiosResponse<IScoreboardClient>> {
   return (
     scoreboardApi()
-      // TODO: Possible to change the number of points here??
+      // TODO: Possible to change the number of points here - This is introduced on purpose
       .post<IScoreboardClient>(`/users`, { clientId, name, totalPoints: 0 })
   );
 }
