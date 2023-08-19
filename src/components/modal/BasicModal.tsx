@@ -25,16 +25,20 @@ export default function BasicModal({
   setGamerTag,
   buttonText,
   openModal,
+  setModalOpen,
+  refetchUser,
+  refetchUsersList,
 }: {
   gamerTag: string;
   setGamerTag: React.Dispatch<React.SetStateAction<string>>;
   buttonText: string;
   openModal: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  refetchUser: () => void;
+  refetchUsersList: () => void;
 }) {
-  const [open, setOpen] = React.useState(openModal);
-
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = () => setModalOpen(true);
+  const handleClose = () => setModalOpen(false);
 
   function generateRandomName() {
     usersAPI.getRandomName().then((response) => {
@@ -52,7 +56,12 @@ export default function BasicModal({
         usersAPI
           .createNewUser(userInfo.id, gamerTag)
           .then((response) => {
-            if (response.status === 201) setOpen(false);
+            if (response.status === 201) {
+              setModalOpen(false);
+              setGamerTag(gamerTag);
+              refetchUser();
+              refetchUsersList();
+            }
           })
           .catch(() => {
             // TODO: Add error handling component
@@ -63,7 +72,7 @@ export default function BasicModal({
   }
 
   function closeModal() {
-    setOpen(false);
+    setModalOpen(false);
   }
 
   function handleGameTagChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -74,7 +83,7 @@ export default function BasicModal({
     <div>
       <Button onClick={handleOpen}>{buttonText}</Button>
       <Modal
-        open={open}
+        open={openModal}
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"

@@ -9,7 +9,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { EnhancedTableToolbar } from './EnhancedTableToolbar';
 import { Data, EnhancedTableHead } from './EnhancedTableHead';
-import { useScoreboardUsersList } from '../../hooks/useScoreboardUsersList';
 import { Alert, CircularProgress } from '@mui/material';
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -182,9 +181,15 @@ function TableComponent({ userList }: { userList: Data[] }) {
   );
 }
 
-export default function EnhancedTable() {
-  const { userList, isLoading, error } = useScoreboardUsersList();
-
+export default function EnhancedTable({
+  userList,
+  isLoading,
+  error,
+}: {
+  userList: Data[];
+  isLoading: boolean;
+  error: unknown;
+}) {
   if (isLoading) {
     return (
       <div>

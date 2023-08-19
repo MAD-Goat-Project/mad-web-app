@@ -43,11 +43,12 @@ export function TabsComponent({
     setValue(newValue);
   };
 
-  function markAssessment() {
+  async function markAssessment() {
     const assessmentId: number = assessments[value].id;
-    return UserAssessmentAPI.post(assessmentId, 2).then(() => {
-      refetch();
-    });
+    await UserAssessmentAPI.post(assessmentId, 2);
+    refetch();
+    if (assessments[value].type !== IAssessmentType.CONCLUSION)
+      setValue(value + 1);
   }
 
   async function markLesson() {
