@@ -1,10 +1,6 @@
 import Toolbar from '@mui/material/Toolbar';
 import { alpha } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
-import Tooltip from '@mui/material/Tooltip';
-import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import * as React from 'react';
 
 interface EnhancedTableToolbarProps {
@@ -46,19 +42,6 @@ export function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
         >
           Scoreboard
         </Typography>
-      )}
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton>
-            <DeleteIcon />
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
       )}
     </Toolbar>
   );
