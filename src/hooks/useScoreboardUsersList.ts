@@ -4,7 +4,7 @@ import UsersAPI from '../api/scoreboard-api/users.api';
 
 export function useScoreboardUsersList() {
   const { data, isLoading, error, refetch } = useQuery<IScoreboardClient[]>(
-    'users',
+    'scoreboardUsers',
     async () => UsersAPI.get().then((res) => res.data)
   );
 

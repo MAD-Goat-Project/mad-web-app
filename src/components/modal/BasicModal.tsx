@@ -42,7 +42,7 @@ export default function BasicModal({
 
   function generateRandomName() {
     usersAPI.getRandomName().then((response) => {
-      setGamerTag(response.data.name);
+      setGamerTag(response.data.name.substring(0, 100));
     });
   }
 
@@ -76,7 +76,7 @@ export default function BasicModal({
   }
 
   function handleGameTagChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setGamerTag(event.target.value);
+    setGamerTag(event.target.value.substring(0, 100));
   }
 
   return (

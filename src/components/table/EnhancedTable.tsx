@@ -55,6 +55,7 @@ function stableSort<T>(
 }
 
 function TableComponent({ userList }: { userList: Data[] }) {
+  const [rows, setRows] = React.useState<Data[]>(userList ?? []);
   const [order, setOrder] = React.useState<Order>('asc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('totalPoints');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -65,7 +66,7 @@ function TableComponent({ userList }: { userList: Data[] }) {
 
   const visibleRows = React.useMemo(
     () =>
-      stableSort(userList ?? [], getComparator(order, orderBy)).slice(
+      stableSort(rows, getComparator(order, orderBy)).slice(
         page * rowsPerPage,
         page * rowsPerPage + rowsPerPage
       ),
@@ -83,7 +84,7 @@ function TableComponent({ userList }: { userList: Data[] }) {
 
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = (userList ?? []).map((n) => n.name);
+      const newSelected = rows.map((n) => n.name);
       setSelected(newSelected);
       return;
     }
@@ -105,9 +106,7 @@ function TableComponent({ userList }: { userList: Data[] }) {
 
   // Avoid a layout jump when reaching the last page with empty userList.
   const emptyRows =
-    page > 0
-      ? Math.max(0, (1 + page) * rowsPerPage - (userList?.length ?? 0))
-      : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - (rows?.length ?? 0)) : 0;
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -125,7 +124,7 @@ function TableComponent({ userList }: { userList: Data[] }) {
               orderBy={orderBy}
               onSelectAllClick={handleSelectAllClick}
               onRequestSort={handleRequestSort}
-              rowCount={userList.length}
+              rowCount={rows.length}
             />
             <TableBody>
               {visibleRows.map((row, index) => {
@@ -170,7 +169,7 @@ function TableComponent({ userList }: { userList: Data[] }) {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
-          count={userList.length}
+          count={rows.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={handleChangePage}

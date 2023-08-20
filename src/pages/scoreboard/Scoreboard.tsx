@@ -1,52 +1,22 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import UsersApi from '../../api/scoreboard-api/users.api';
-import keycloak from '../../configurations/keycloak';
+import { useState } from 'react';
 import { Alert, CircularProgress } from '@mui/material';
 import BasicModal from '../../components/modal/BasicModal';
-import { AxiosError } from 'axios';
 import EnhancedTable from '../../components/table/EnhancedTable';
 import { useScoreboardUsersList } from '../../hooks/useScoreboardUsersList';
-import { useLocation } from 'react-router-dom';
+import { useScoreboardUser } from '../../hooks/useScoreboardUser';
 
 // TODO: Change API so that it returns a 200 if the user does not exist but specifies that the user does not exist
 
 function ScoreboardPage() {
   const [gamerTag, setGamerTag] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const {
-    data: userExists,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery<boolean>('scoreboard', async () =>
-    UsersApi.getClient(keycloak.idTokenParsed?.sub ?? '')
-      .then((res) => {
-        return res.status === 200 && res.data.name?.length > 0;
-      })
-      .catch((err: AxiosError) => {
-        if (err.response?.status === 404) {
-          return false;
-        } else {
-          throw err;
-        }
-      })
-  );
-
+  const { userExists, isLoadingUser, errorUser, refetchUser } =
+    useScoreboardUser();
   const { userList, loadingUsers, errorUsers, refetchUsers } =
     useScoreboardUsersList();
-  const location = useLocation();
 
-  useEffect(() => {
-    refetchUsers();
-  }, [location, refetchUsers]);
-
-  useEffect(() => {
-    refetch();
-  }, [refetch]);
-
-  if (isLoading) {
+  if (isLoadingUser) {
     return (
       <div>
         <CircularProgress />
@@ -54,7 +24,7 @@ function ScoreboardPage() {
     );
   }
 
-  if (error) {
+  if (errorUser) {
     return (
       <div>
         <Alert severity="error">
@@ -85,7 +55,7 @@ function ScoreboardPage() {
             buttonText={'Create Gamer Tag'}
             openModal={isModalOpen}
             setModalOpen={setIsModalOpen}
-            refetchUser={refetch}
+            refetchUser={refetchUser}
             refetchUsersList={refetchUsers}
           />
         </>
