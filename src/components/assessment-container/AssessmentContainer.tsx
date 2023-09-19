@@ -99,7 +99,7 @@ export function AssessmentContainer({
               <Paper sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography variant="body1" textAlign="left">
-                    {assessment.goal}
+                    {ParsedHTML(assessment.goal)}
                   </Typography>
                 </Box>
               </Paper>
