@@ -10,5 +10,5 @@ on:
 
 jobs:
   security:
-    uses: MAD-Goat-Project/github-actions-workflows/.github/workflows/security-scans.yml@main
+    uses: MAD-Goat-Project/github-actions-workflows/.github/workflows/security-scans.yml@v1
     secrets: inherit
