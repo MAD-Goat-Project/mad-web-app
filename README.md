@@ -120,6 +120,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <a href="https://iconscout.com/lottie-animations/content-moderation" class="text-underline font-size-sm" target="_blank">Content Moderation</a> by <a href="https://iconscout.com/contributors/nanoagency" class="text-underline font-size-sm" target="_blank">nanoagency</a>
 
+<a href="https://iconscout.com/lottie-animations/singing-contract" class="text-underline font-size-sm" target="_blank">Singing Contract</a> by <a href="https://iconscout.com/contributors/nanoagency" class="text-underline font-size-sm" target="_blank">nanoagency</a>
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
