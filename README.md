@@ -120,6 +120,12 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <a href="https://iconscout.com/lottie-animations/content-moderation" class="text-underline font-size-sm" target="_blank">Content Moderation</a> by <a href="https://iconscout.com/contributors/nanoagency" class="text-underline font-size-sm" target="_blank">nanoagency</a>
 
+<a href="https://iconscout.com/lottie-animations/singing-contract" class="text-underline font-size-sm" target="_blank">Singing Contract</a> by <a href="https://iconscout.com/contributors/nanoagency" class="text-underline font-size-sm" target="_blank">nanoagency</a>
+
+<a href="https://iconscout.com/lottie-animations/coronavirus" class="text-underline font-size-sm" target="_blank">Coronavirus</a> by <a href="https://iconscout.com/contributors/hill-motion" class="text-underline font-size-sm">Hill Motion</a> on <a href="https://iconscout.com" class="text-underline font-size-sm">IconScout</a>
+
+<a href="https://iconscout.com/lottie-animations/website-maintenance" class="text-underline font-size-sm" target="_blank">Website Maintenance</a> by <a href="https://iconscout.com/contributors/nanoagency" class="text-underline font-size-sm">nanoagency</a> on <a href="https://iconscout.com" class="text-underline font-size-sm">IconScout</a>
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
