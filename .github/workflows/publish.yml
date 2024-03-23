@@ -2,14 +2,12 @@ name: Publish Docker image
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: ['main']
   workflow_dispatch:
-
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-
 
 jobs:
   build-and-push-image:
@@ -33,7 +31,7 @@ jobs:
           source env_file
           set +o allexport
           rm env_file
-          echo "Env variables created" 
+          echo "Env variables created"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2

@@ -7,6 +7,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import LibraryBooksIcon from '@mui/icons-material/LibraryBooks';
 
 const DOCS_URL = import.meta.env.VITE_DOCS_BASE_URL as string;
+
 export interface IDrawerOptions {
   Name: string;
   Icon: OverridableComponent<SvgIconTypeMap> & { muiName: string };

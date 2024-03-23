@@ -5,11 +5,13 @@ import { IScoreboardClient } from '../../models/scoreboard.interface';
 async function get(): Promise<AxiosResponse<IScoreboardClient[]>> {
   return scoreboardApi().get(`/users`);
 }
+
 async function getClient(
   clientId: string
 ): Promise<AxiosResponse<IScoreboardClient>> {
   return scoreboardApi().get(`/users/client/${clientId}`);
 }
+
 async function getRandomName(): Promise<AxiosResponse<{ name: string }>> {
   return (
     scoreboardApi()

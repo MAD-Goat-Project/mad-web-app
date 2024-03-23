@@ -1,4 +1,4 @@
-version: "3.0"
+version: '3.0'
 
 services:
   webapp:
@@ -6,7 +6,7 @@ services:
     env_file:
       - .env.local
     build:
-        context: .
-        dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile
     ports:
-        - "3010:80"
+      - '3010:80'

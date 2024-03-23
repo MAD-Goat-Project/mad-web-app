@@ -26,6 +26,7 @@ function a11yProps(index: number) {
     'aria-controls': `tab-${index}`,
   };
 }
+
 export function TabsComponent({
   assessments,
   refetch,

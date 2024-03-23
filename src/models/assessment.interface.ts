@@ -6,6 +6,7 @@ export enum IAssessmentType {
   QUIZ = 3,
   CONCLUSION = 10,
 }
+
 export interface IAssessment {
   id: number;
   type: IAssessmentType;

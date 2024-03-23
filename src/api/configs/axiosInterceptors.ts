@@ -23,6 +23,7 @@ function tokenInterceptor(config: any): any {
   config.headers.Authorization = token ? `Bearer ${token}` : '';
   return config;
 }
+
 export const setupInterceptors = (instance: AxiosInstance): AxiosInstance => {
   instance.interceptors.response.use((response) => response, errorHandler);
   instance.interceptors.request.use(tokenInterceptor);

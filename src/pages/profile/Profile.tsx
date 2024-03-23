@@ -1,6 +1,7 @@
 import { useProfileList } from '../../hooks/useProfileList';
 import { Alert, CircularProgress, TextField } from '@mui/material';
 import Grid from '@mui/material/Grid';
+import type { JSX } from 'react';
 
 function Profile(): JSX.Element {
   const { profileList, isLoading, error } = useProfileList();
@@ -65,4 +66,5 @@ function Profile(): JSX.Element {
     </div>
   );
 }
+
 export default Profile;

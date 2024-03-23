@@ -35,6 +35,7 @@ async function post(
     status,
   });
 }
+
 const UserAssessmentAPI = {
   get,
   patch,

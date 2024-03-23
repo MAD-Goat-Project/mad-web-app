@@ -116,7 +116,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <a href="https://iconscout.com/icons/mind-system" target="_blank">Free Mind system Icon</a> by <a href="https://iconscout.com/contributors/turan-kent">Turan Kent</a> on <a href="https://iconscout.com">IconScout</a>
 
-<a href="https://iconscout.com/lotties/security-research" target="_blank">Free Security Research  Animated Illustration</a> by <a href="https://iconscout.com/contributors/nanoagency" target="_blank">nanoagency</a>
+<a href="https://iconscout.com/lotties/security-research" target="_blank">Free Security Research Animated Illustration</a> by <a href="https://iconscout.com/contributors/nanoagency" target="_blank">nanoagency</a>
 
 <a href="https://iconscout.com/lottie-animations/content-moderation" class="text-underline font-size-sm" target="_blank">Content Moderation</a> by <a href="https://iconscout.com/contributors/nanoagency" class="text-underline font-size-sm" target="_blank">nanoagency</a>
 

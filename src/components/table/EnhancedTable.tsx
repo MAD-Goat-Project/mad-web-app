@@ -35,10 +35,6 @@ function getComparator<Key extends keyof any>(
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
 function stableSort<T>(
   array: readonly T[],
   comparator: (a: T, b: T) => number
@@ -55,13 +51,11 @@ function stableSort<T>(
 }
 
 function TableComponent({ userList }: { userList: Data[] }) {
-  const [rows, setRows] = React.useState<Data[]>(userList ?? []);
-  const [order, setOrder] = React.useState<Order>('asc');
+  const [rows] = React.useState<Data[]>(userList ?? []);
+  const [order, setOrder] = React.useState<Order>('desc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('totalPoints');
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
-  //TODO: Remove dense
-  const [dense, setDense] = React.useState(false);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const visibleRows = React.useMemo(
@@ -109,14 +103,14 @@ function TableComponent({ userList }: { userList: Data[] }) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - (rows?.length ?? 0)) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
-      <Paper sx={{ width: '100%', mb: 2 }}>
+    <Box sx={{ width: '65vw', height: 'auto' }}>
+      <Paper sx={{ mb: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
-        <TableContainer>
+        <TableContainer sx={{ minWidth: '100%', overflowX: 'auto' }}>
           <Table
-            sx={{ minWidth: 750 }}
-            aria-labelledby="tableTitle"
-            size={dense ? 'small' : 'medium'}
+            aria-labelledby="scoreboard-table"
+            size={'medium'}
+            sx={{ width: '100%' }}
           >
             <EnhancedTableHead
               numSelected={selected.length}
@@ -157,7 +151,7 @@ function TableComponent({ userList }: { userList: Data[] }) {
               {emptyRows > 0 && (
                 <TableRow
                   style={{
-                    height: (dense ? 33 : 53) * emptyRows,
+                    height: 53 * emptyRows,
                   }}
                 >
                   <TableCell colSpan={6} />

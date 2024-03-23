@@ -18,7 +18,6 @@ export default function LessonCard({
   category,
   progress,
   image,
-  image_alt,
 }: {
   title: string;
   description: string;

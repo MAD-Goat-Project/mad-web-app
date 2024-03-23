@@ -28,6 +28,7 @@ async function patch(
     status,
   });
 }
+
 async function post(
   userId: string,
   lessonId: number,

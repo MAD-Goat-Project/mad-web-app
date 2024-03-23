@@ -13,6 +13,7 @@ export interface Data {
   name: string;
   totalPoints: number;
 }
+
 interface HeadCell<T> {
   disablePadding: boolean;
   id: keyof T;
