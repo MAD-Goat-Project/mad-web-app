@@ -1,4 +1,4 @@
-import { Box, Tab, Tabs } from '@mui/material';
+import { Box, Tab, Tabs, useMediaQuery } from '@mui/material';
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import {
@@ -19,6 +19,7 @@ import UserProgressAPI from '../../api/lessons-api/user-lesson-progress.api';
 import UserLessonProgressApi from '../../api/lessons-api/user-lesson-progress.api';
 import Button from '@mui/material/Button';
 import { LessonStatus } from '../../models/user-lesson-progress.interface';
+import { useTheme } from '@mui/material/styles';
 
 function a11yProps(index: number) {
   return {
@@ -39,6 +40,9 @@ export function TabsComponent({
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -111,15 +115,25 @@ export function TabsComponent({
   };
 
   return (
-    <Box sx={{ display: 'flex', minHeight: minHeight }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: isSmallScreen ? 'column' : 'row',
+        minHeight: minHeight,
+      }}
+    >
+      <Box sx={{ borderColor: 'divider', minWidth: 200 }}>
         <Tabs
-          orientation="vertical"
+          orientation={isSmallScreen ? 'horizontal' : 'vertical'}
           variant="scrollable"
           value={value}
           onChange={handleChange}
           aria-label="Assessments tabs"
-          sx={{ borderRight: 1, borderColor: 'divider', width: '108%' }}
+          sx={{
+            borderRight: isSmallScreen ? 0 : 1,
+            borderColor: 'divider',
+            width: isSmallScreen ? '100%' : 'auto',
+          }}
         >
           {assessments?.map((assessment, index) => (
             <Tab
@@ -137,37 +151,46 @@ export function TabsComponent({
         // TODO: Fix Width and Height
         assessments?.map((assessment, index) => (
           <TabPanel value={value} index={index} key={assessment.id}>
-            <Box sx={{ p: 3, minWidth: '80%', minHeight: minHeight }}>
-              <Grid container spacing={2}>
-                <AssessmentContainer
-                  assessment={assessment}
-                  markAssessment={validateAssessment}
-                />
-              </Grid>
-              {(assessments[value].type === IAssessmentType.INTRODUCTION ||
-                assessments[value].type === IAssessmentType.CONCLUSION) && (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    marginTop: 2,
-                  }}
-                >
-                  {assessments[value].status === 2 ? (
-                    <Button variant="contained" color="primary" disabled>
-                      Completed
-                    </Button>
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={validateAssessment}
+            <Box
+              sx={{
+                p: 3,
+                width: '100%',
+                margin: isSmallScreen ? '20px auto' : '0 auto', // Adjusted margin based on screen size
+                minHeight: minHeight,
+              }}
+            >
+              <Grid container spacing={2} justifyContent="center">
+                <Grid item xs={12}>
+                  <AssessmentContainer
+                    assessment={assessment}
+                    markAssessment={validateAssessment}
+                  />
+                  {(assessment.type === IAssessmentType.INTRODUCTION ||
+                    assessment.type === IAssessmentType.CONCLUSION) && (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'flex-end',
+                        marginTop: 2,
+                      }}
                     >
-                      Complete
-                    </Button>
+                      {assessment.status === 2 ? (
+                        <Button variant="contained" color="primary" disabled>
+                          Completed
+                        </Button>
+                      ) : (
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          onClick={validateAssessment}
+                        >
+                          Complete
+                        </Button>
+                      )}
+                    </Box>
                   )}
-                </Box>
-              )}
+                </Grid>
+              </Grid>
             </Box>
           </TabPanel>
         ))
