@@ -30,7 +30,7 @@ export function Submissions({
     return (
       <TextField
         label="Submit your answer"
-        sx={{ mb: 2, width: '300px' }}
+        sx={{ mb: 2, width: '300re' }}
         value={answer}
         onChange={(e) => {
           setAnswer([e.target.value]);

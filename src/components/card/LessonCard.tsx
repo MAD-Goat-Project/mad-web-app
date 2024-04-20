@@ -55,7 +55,7 @@ export default function LessonCard({
   const { label, color } = getStatusLabel();
 
   return (
-    <Card sx={{ maxWidth: '1200px' }} key={lessonId}>
+    <Card sx={{ maxWidth: 'auto' }} key={lessonId}>
       <CardContent>
         <div
           style={{

@@ -58,15 +58,6 @@ export function AssessmentContainer({
         open={snackbarProps.open}
       />
 
-      <Grid
-        item
-        container
-        xs={12}
-        style={{ marginBottom: '10px' }}
-        alignContent="flex-start"
-      >
-        {/*<Chip icon={<DescriptionIcon />} label="Description" />*/}
-      </Grid>
       <Grid item xs={12} style={{ marginBottom: '20px' }}>
         <Paper
           sx={{
@@ -90,13 +81,23 @@ export function AssessmentContainer({
               item
               container
               xs={12}
+              alignItems="center" // Center the items vertically
               alignContent="flex-start"
               style={{ marginBottom: '10px' }}
             >
               <Chip icon={<CrisisAlertIcon />} label="Goal" />
             </Grid>
             <Grid item xs={12} style={{ marginBottom: '20px' }}>
-              <Paper sx={{ p: 2, display: 'flex', alignItems: 'center' }}>
+              <Paper
+                sx={{
+                  p: 2,
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                }}
+              >
+                {' '}
                 <Box sx={{ flexGrow: 1 }}>
                   <Typography variant="body1" textAlign="left">
                     {ParsedHTML(assessment.goal)}
